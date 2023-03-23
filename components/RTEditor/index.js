@@ -1,8 +1,6 @@
+import { forwardRef } from "react";
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
-import Hook from "./Hooks";
-
-import { IoSaveOutline } from "react-icons/io5";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
@@ -14,14 +12,7 @@ const formats = [
   [{ color: [] }, { background: [] }],
 ];
 
-const RTEditor = () => {
-  const {
-    ref,
-    body,
-    // actions
-    setBody,
-    handleInsertNote,
-  } = Hook();
+const RTEditor = forwardRef(({ body, setBody }, ref) => {
   return (
     <div>
       <div>
@@ -40,12 +31,8 @@ const RTEditor = () => {
           toolbar: formats,
         }}
       />
-      <button onClick={handleInsertNote} className="gap-2 btn">
-        <IoSaveOutline />
-        <span>Save</span>
-      </button>
     </div>
   );
-};
+});
 
 export default RTEditor;

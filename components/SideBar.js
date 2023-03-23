@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import { themeChange } from "theme-change";
 
 import IfElse from "./IfElse";
@@ -11,7 +11,7 @@ import { FiSun } from "react-icons/fi";
 
 import Link from "next/link";
 
-const SideBar = () => {
+const SideBar = memo(() => {
   const [theme, setTheme] = useState("");
   useEffect(() => {
     themeChange(false);
@@ -70,6 +70,6 @@ const SideBar = () => {
       </div>
     </div>
   );
-};
+});
 
 export default SideBar;
