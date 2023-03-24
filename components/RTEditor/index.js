@@ -5,30 +5,31 @@ import "react-quill/dist/quill.snow.css";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 const formats = [
-  [{ header: [1, 2, 3, false] }],
   ["bold", "italic", "underline", "strike", "link"],
+  [{ header: [1, 2, 3, false] }],
   ["blockquote", "code-block"],
   [{ list: "ordered" }, { list: "bullet" }],
   [{ color: [] }, { background: [] }],
 ];
 
-const RTEditor = forwardRef(({ body, setBody }, ref) => {
+const RTEditor = forwardRef(({ body, setBody, readOnly = false }, ref) => {
   return (
     <div>
-      <div>
+      <div className="py-3">
         <input
           ref={ref}
           type="text"
           placeholder="Title Here"
-          className="w-full text-xl font-bold focus:outline-none input"
+          className="w-full text-xl font-bold focus:outline-none bg-transparent px-0"
         />
       </div>
       <ReactQuill
+        readOnly={readOnly}
         theme="snow"
         value={body}
         onChange={setBody}
         modules={{
-          toolbar: formats,
+          toolbar: readOnly ? false : formats,
         }}
       />
     </div>

@@ -1,14 +1,12 @@
-import { useEffect, useState, memo } from "react";
+import { memo, useEffect, useState } from "react";
 import { themeChange } from "theme-change";
 
 import IfElse from "./IfElse";
 
-import { FiPlus } from "react-icons/fi";
-import { FiEdit3 } from "react-icons/fi";
-import { FiMenu } from "react-icons/fi";
-import { FiMoon } from "react-icons/fi";
-import { FiSun } from "react-icons/fi";
+import { FiEdit3, FiMenu, FiMoon, FiPlus, FiSun } from "react-icons/fi";
+import { IoSaveOutline } from "react-icons/io5";
 
+import { EDITOR, MY_NOTES } from "@/utils/locationPathName";
 import Link from "next/link";
 
 const SideBar = memo(() => {
@@ -21,25 +19,30 @@ const SideBar = memo(() => {
 
   return (
     <div className="card">
-      <button className="gap-2 btn btn-sm btn-outline">
-        <i className="w-4">
-          <FiPlus className="w-full h-full" />
-        </i>
-        <span>New Note</span>
-      </button>
+      <Link href={EDITOR}>
+        <button className="gap-2 btn btn-sm btn-outline btn-block">
+          <i className="w-4">
+            <FiPlus className="w-full h-full" />
+          </i>
+          <span>New Note</span>
+        </button>
+      </Link>
       <div className="py-2 card-actions">
         <button className="btn btn-sm btn-outline btn-square">
           <i className="w-4">
             <FiEdit3 className="w-full h-full" />
           </i>
         </button>
-        <Link href="/my-notes">
+        <Link href={MY_NOTES}>
           <button className="btn btn-sm btn-outline btn-square">
             <i className="w-4">
               <FiMenu className="w-full h-full" />
             </i>
           </button>
         </Link>
+        <button className="btn btn-sm btn-outline btn-square">
+          <IoSaveOutline />
+        </button>
       </div>
       <div className="py-2 card-actions">
         <IfElse

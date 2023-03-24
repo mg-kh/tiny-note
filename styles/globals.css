@@ -9,8 +9,26 @@
 /* ----- Quill Overrides ----- */
 .ql-toolbar,.ql-container{
     border: none !important;
+    padding : 0px !important;
 }
-.ql-toolbar{
-    background-color: white;
-    border-radius: 10px;
+.ql-toolbar {
+    margin-bottom: 10px;
+}
+.ql-editor{
+    padding : 0!important;
+    min-height: 100px;
+}
+.ql-active{
+    border :  1px solid #7c7c7c !important;
+    border-radius: 3px!important;
+    margin-left: 1px;
+}
+.ql-stroke{
+    stroke : #a3a3a3!important;
+}
+.ql-fill{
+    fill : #a3a3a3!important;
+}
+.ql-picker-label{
+    color : #a3a3a3!important;
 }

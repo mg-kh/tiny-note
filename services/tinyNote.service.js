@@ -1,3 +1,4 @@
+import { GENERAL } from "@/utils/errorMessages";
 import { ClearNotes, GetAllNotes, InsertNotes } from "@/utils/storage";
 import { cloneDeep, filter, findIndex, includes } from "lodash";
 
@@ -7,7 +8,7 @@ export const insertNote = async (data) => {
     const combineAllNotes = [data, ...allNotes];
     return await InsertNotes(combineAllNotes);
   } catch (error) {
-    console.error(error);
+    return GENERAL;
   }
 };
 
@@ -16,7 +17,7 @@ export const getAllNotes = async () => {
     const allNotes = await GetAllNotes();
     return allNotes;
   } catch (error) {
-    console.error(error);
+    return GENERAL;
   }
 };
 
@@ -26,7 +27,7 @@ export const getSingleNote = async (id) => {
     const filteredData = allNotes.find((note) => note.id === id);
     return filteredData;
   } catch (error) {
-    console.error(error);
+    return GENERAL;
   }
 };
 
@@ -38,25 +39,26 @@ export const searchByTitle = async (keyword) => {
     );
     return filterNotes;
   } catch (error) {
-    console.error(error);
+    return GENERAL;
   }
 };
 
 export const removeSingleNote = async (id) => {
   try {
     const allNotes = await GetAllNotes();
-    const idx = findIndex(allNotes, (note) => note.id === id);
-    const spliceNotes = allNotes.splice(idx, 1);
-    return await InsertNotes(spliceNotes);
+    const filteredNotes = filter(allNotes, (note) => note.id !== id);
+    await InsertNotes(filteredNotes);
+    return filteredNotes;
   } catch (error) {
-    console.error(error);
+    return GENERAL;
   }
 };
 
 export const clearNotes = async (id) => {
   try {
-    return await ClearNotes();
+    await ClearNotes();
+    return [];
   } catch (error) {
-    console.error(error);
+    return GENERAL;
   }
 };
