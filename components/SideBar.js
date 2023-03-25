@@ -8,7 +8,7 @@ import { FiMenu, FiMoon, FiPlus, FiSun } from "react-icons/fi";
 import { EDITOR, MY_NOTES } from "@/utils/locationPathName";
 import Link from "next/link";
 
-const SideBar = memo(({ editBtn, saveBtn }) => {
+const SideBar = memo(function SideBar({ editBtn, saveBtn }) {
   const [theme, setTheme] = useState("");
   useEffect(() => {
     themeChange(false);

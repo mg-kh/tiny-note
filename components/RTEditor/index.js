@@ -12,7 +12,10 @@ const formats = [
   [{ color: [] }, { background: [] }],
 ];
 
-const RTEditor = forwardRef(({ body, setBody, readOnly = false }, ref) => {
+const RTEditor = forwardRef(function RTEditor(
+  { body, setBody, readOnly = false },
+  ref
+) {
   return (
     <div>
       <div className="py-3">
