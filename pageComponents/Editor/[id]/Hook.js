@@ -20,7 +20,6 @@ const Hook = () => {
     replaceNote(id, data)
       .then(() => {
         EventBus.emit("alert", {
-          isShow: true,
           type: "success",
           message: UPDATE_SUCCESS_MESSAGE,
         });

@@ -16,14 +16,12 @@ const Hook = () => {
     insertNote(note)
       .then(() => {
         EventBus.emit("alert", {
-          isShow: true,
           type: "success",
           message: INSERT_SUCCESS_MESSAGE,
         });
       })
       .catch((error) => {
         EventBus.emit("alert", {
-          isShow: true,
           type: "error",
           message: error,
         });

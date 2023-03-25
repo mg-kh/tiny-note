@@ -1,7 +1,6 @@
-import SideBar from "@/components/SideBar";
-import React, { useState } from "react";
-import useEventBus from "@/hooks/useEventBus";
 import Alert from "@/components/Alert";
+import Footer from "@/components/Footer";
+import SideBar from "@/components/SideBar";
 
 const MainLayout = ({ main, editBtn, saveBtn }) => {
   return (
@@ -15,6 +14,9 @@ const MainLayout = ({ main, editBtn, saveBtn }) => {
             <Alert />
             {main}
           </main>
+          <footer className="fixed bottom-0 w-full left-0">
+            <Footer editBtn={editBtn} saveBtn={saveBtn} />
+          </footer>
         </div>
       </section>
     </>

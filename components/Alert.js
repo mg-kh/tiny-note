@@ -5,14 +5,14 @@ import useEventBus from "@/hooks/useEventBus";
 
 import IfElse from "./IfElse";
 
-const Alert = ({ type }) => {
+const Alert = () => {
   const { subscribe } = useEventBus();
   const [isShowAlert, setIsShowAlert] = useState(false);
   const [alertType, setAlertType] = useState("success");
   const [message, setAlertMessage] = useState("");
 
-  subscribe("alert", ({ isShow, type, message }) => {
-    setIsShowAlert(isShow);
+  subscribe("alert", ({ type, message }) => {
+    setIsShowAlert(true);
     setAlertType(type);
     setAlertMessage(message);
     const interval = setInterval(() => {
@@ -27,7 +27,7 @@ const Alert = ({ type }) => {
         <IfElse
           isTrue={alertType === "success"}
           ifBlock={
-            <div className="toast toast-top toast-end">
+            <div className="toast toast-top toast-end w-32">
               <div className="alert alert-success shadow-lg py-2 rounded-md">
                 <div className="p-1 bg-green-600 rounded-full">
                   <FiCheck className="stroke-white" />
@@ -37,7 +37,7 @@ const Alert = ({ type }) => {
             </div>
           }
           elseBlock={
-            <div className="toast toast-top toast-end">
+            <div className="toast toast-top toast-end w-32">
               <div className="alert alert-error shadow-lg py-2 rounded-md">
                 <div className="p-1 bg-red-600 rounded-full">
                   <FiAlertOctagon className="stroke-white" />

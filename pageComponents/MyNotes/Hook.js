@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 
 import { getAllNotes, removeSingleNote } from "@/services/tinyNote.service";
+import { DELETE_SUCCESS_MESSAGE } from "@/utils/infoMessages";
 
 const Hook = () => {
   const [notes, setNotes] = useState([]);
@@ -17,6 +18,10 @@ const Hook = () => {
     removeSingleNote(id)
       .then((notes) => {
         setNotes(notes);
+        EventBus.emit("alert", {
+          type: "success",
+          message: DELETE_SUCCESS_MESSAGE,
+        });
       })
       .catch(() => {
         //
