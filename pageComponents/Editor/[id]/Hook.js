@@ -1,7 +1,6 @@
-import { getSingleNote } from "@/services/tinyNote.service";
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { EDITOR } from "@/utils/locationPathName";
+import { getSingleNote, replaceNote } from "@/services/tinyNote.service";
 
 const Hook = () => {
   const ref = useRef();
@@ -11,19 +10,29 @@ const Hook = () => {
     query: { id },
   } = router;
 
-  const handleGetSingleNote = useCallback(() => {
+  const handleSave = () => {
+    const data = {
+      id,
+      title: ref.current.value,
+      body,
+    };
+    replaceNote(id, data)
+      .then(() => {
+        //
+      })
+      .catch(() => {
+        //
+      });
+  };
+  const handleGetSingleNote = () => {
     getSingleNote(id)
       .then((note) => {
         ref.current.value = note?.title;
         setBody(note?.body);
       })
-      .catch((e) => {
-        console.log(e);
+      .catch(() => {
+        //
       });
-  }, [id]);
-
-  const handleGoToEdit = () => {
-    router.push(`${EDITOR}/${id}`);
   };
 
   useEffect(() => {
@@ -33,9 +42,9 @@ const Hook = () => {
   return {
     ref,
     body,
-    // action
+    // actions
     setBody,
-    handleGoToEdit,
+    handleSave,
   };
 };
 

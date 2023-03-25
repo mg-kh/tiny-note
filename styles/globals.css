@@ -17,6 +17,7 @@
 .ql-editor{
     padding : 0!important;
     min-height: 100px;
+    line-height: 32px!important;
 }
 .ql-active{
     border :  1px solid #7c7c7c !important;

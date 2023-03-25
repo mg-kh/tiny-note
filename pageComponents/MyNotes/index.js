@@ -21,8 +21,8 @@ const MyNotes = () => {
         main={
           <>
             <div className="">
-              <h3 className="text-3xl mb-3">All Notes</h3>
-              {notes.map((note) => (
+              <h3 className="mb-3 text-3xl">All Notes</h3>
+              {notes?.map((note) => (
                 <Link href={`${MY_NOTES}/${note.id}`} key={note.id}>
                   <div className="flex items-center gap-2">
                     <button

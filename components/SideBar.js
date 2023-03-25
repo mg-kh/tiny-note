@@ -3,13 +3,12 @@ import { themeChange } from "theme-change";
 
 import IfElse from "./IfElse";
 
-import { FiEdit3, FiMenu, FiMoon, FiPlus, FiSun } from "react-icons/fi";
-import { IoSaveOutline } from "react-icons/io5";
+import { FiMenu, FiMoon, FiPlus, FiSun } from "react-icons/fi";
 
 import { EDITOR, MY_NOTES } from "@/utils/locationPathName";
 import Link from "next/link";
 
-const SideBar = memo(() => {
+const SideBar = memo(({ editBtn, saveBtn }) => {
   const [theme, setTheme] = useState("");
   useEffect(() => {
     themeChange(false);
@@ -28,21 +27,17 @@ const SideBar = memo(() => {
         </button>
       </Link>
       <div className="py-2 card-actions">
-        <button className="btn btn-sm btn-outline btn-square">
-          <i className="w-4">
-            <FiEdit3 className="w-full h-full" />
-          </i>
-        </button>
+        {editBtn}
         <Link href={MY_NOTES}>
-          <button className="btn btn-sm btn-outline btn-square">
-            <i className="w-4">
-              <FiMenu className="w-full h-full" />
-            </i>
-          </button>
+          <div className="tooltip hover:tooltip-open" data-tip="All Notes">
+            <button className="btn btn-sm btn-outline btn-square">
+              <i className="w-4">
+                <FiMenu className="w-full h-full" />
+              </i>
+            </button>
+          </div>
         </Link>
-        <button className="btn btn-sm btn-outline btn-square">
-          <IoSaveOutline />
-        </button>
+        {saveBtn}
       </div>
       <div className="py-2 card-actions">
         <IfElse

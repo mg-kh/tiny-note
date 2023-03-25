@@ -17,10 +17,11 @@ const RTEditor = forwardRef(({ body, setBody, readOnly = false }, ref) => {
     <div>
       <div className="py-3">
         <input
+          disabled={readOnly}
           ref={ref}
           type="text"
           placeholder="Title Here"
-          className="w-full text-xl font-bold focus:outline-none bg-transparent px-0"
+          className="w-full px-0 text-xl font-bold bg-transparent focus:outline-none"
         />
       </div>
       <ReactQuill
