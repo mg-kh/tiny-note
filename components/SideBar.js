@@ -18,7 +18,7 @@ const SideBar = memo(function SideBar({ editBtn, saveBtn }) {
 
   return (
     <div className="card">
-      <Link href={EDITOR}>
+      <Link className="pb-2" href={EDITOR}>
         <button className="gap-2 btn btn-sm btn-outline btn-block">
           <i className="w-4">
             <FiPlus className="w-full h-full" />
@@ -44,22 +44,22 @@ const SideBar = memo(function SideBar({ editBtn, saveBtn }) {
           isTrue={theme === "winter"}
           ifBlock={
             <button
-              className="btn btn-outline btn-sm"
+              className="btn btn-outline btn-sm btn-square"
               data-set-theme="dark"
               onClick={() => setTheme("dark")}
             >
-              <i className="w-3">
+              <i className="w-4">
                 <FiMoon className="w-full h-full" />
               </i>
             </button>
           }
           elseBlock={
             <button
-              className="btn btn-outline btn-sm"
+              className="btn btn-outline btn-sm btn-square"
               data-set-theme="winter"
               onClick={() => setTheme("winter")}
             >
-              <i className="w-3">
+              <i className="w-4">
                 <FiSun className="w-full h-full" />
               </i>
             </button>

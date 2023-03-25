@@ -14,7 +14,7 @@ const MainLayout = ({ main, editBtn, saveBtn }) => {
             <Alert />
             {main}
           </main>
-          <footer className="fixed bottom-0 w-full left-0">
+          <footer className="fixed bottom-0 w-full left-0 md:hidden">
             <Footer editBtn={editBtn} saveBtn={saveBtn} />
           </footer>
         </div>

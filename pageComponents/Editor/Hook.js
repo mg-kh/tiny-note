@@ -19,6 +19,8 @@ const Hook = () => {
           type: "success",
           message: INSERT_SUCCESS_MESSAGE,
         });
+        setBody("");
+        ref.current.value = "";
       })
       .catch((error) => {
         EventBus.emit("alert", {

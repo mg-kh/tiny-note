@@ -1,10 +1,15 @@
 import { useEffect, useState, useCallback } from "react";
 
-import { getAllNotes, removeSingleNote } from "@/services/tinyNote.service";
+import {
+  getAllNotes,
+  removeSingleNote,
+  searchByTitle,
+} from "@/services/tinyNote.service";
 import { DELETE_SUCCESS_MESSAGE } from "@/utils/infoMessages";
 
 const Hook = () => {
   const [notes, setNotes] = useState([]);
+  const [keyword, setKeyword] = useState(null);
 
   const handleGetAllNotes = useCallback(() => {
     getAllNotes()
@@ -28,14 +33,33 @@ const Hook = () => {
       });
   };
 
+  const handleSearchByTitle = (keyword) => {
+    setKeyword(keyword);
+    searchByTitle(keyword)
+      .then((notes) => {
+        setNotes(notes);
+      })
+      .catch(() => {
+        //
+      });
+  };
+
+  const handleCancelSearch = () => {
+    setKeyword(null);
+    handleGetAllNotes();
+  };
+
   useEffect(() => {
     handleGetAllNotes();
   }, []);
 
   return {
     notes,
+    keyword,
     // actions
     handleRemoveSingleNote,
+    handleSearchByTitle,
+    handleCancelSearch,
   };
 };
 

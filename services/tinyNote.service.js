@@ -1,6 +1,6 @@
 import { GENERAL_ERROR_MESSAGE } from "@/utils/infoMessages";
 import { ClearNotes, GetAllNotes, InsertNotes } from "@/utils/storage";
-import { cloneDeep, filter, findIndex, includes } from "lodash";
+import { cloneDeep, filter, findIndex, includes, lowerCase } from "lodash";
 
 export const insertNote = async (data) => {
   try {
@@ -46,7 +46,7 @@ export const searchByTitle = async (keyword) => {
   try {
     const allNotes = await GetAllNotes();
     const filterNotes = filter(cloneDeep(allNotes), (note) =>
-      includes(note.title, keyword)
+      includes(lowerCase(note.title), lowerCase(keyword))
     );
     return filterNotes;
   } catch (error) {

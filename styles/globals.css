@@ -29,7 +29,7 @@
     background-color: #3a404c;
 }
 .ql-editor{
-    padding : 0!important;
+    padding : 10px 0px!important;
     min-height: 100px;
     line-height: 32px!important;
 }
