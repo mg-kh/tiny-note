@@ -20,16 +20,16 @@
     padding : 5px!important;
     border-radius: 8px;
     display: inline-block;
+    margin : 7px 0px;
 }
 [data-theme=winter] .ql-toolbar{
     background-color: white;
-
 }
 [data-theme=dark] .ql-toolbar {
     background-color: #3a404c;
 }
 .ql-editor{
-    padding : 10px 0px!important;
+    padding : 0px!important;
     min-height: 100px;
     line-height: 32px!important;
 }

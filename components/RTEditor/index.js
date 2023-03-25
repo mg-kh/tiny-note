@@ -18,7 +18,7 @@ const RTEditor = forwardRef(function RTEditor(
 ) {
   return (
     <div>
-      <div className="pb-3">
+      <div className="">
         <input
           disabled={readOnly}
           ref={ref}
@@ -27,6 +27,7 @@ const RTEditor = forwardRef(function RTEditor(
           className="w-full p-0 text-xl font-bold bg-transparent focus:outline-none"
         />
       </div>
+      {readOnly && <div className="divider my-0.5"></div>}
       <ReactQuill
         readOnly={readOnly}
         theme="snow"
