@@ -1,4 +1,5 @@
 import { insertNote } from "@/services/tinyNote.service";
+import { INSERT_SUCCESS_MESSAGE } from "@/utils/infoMessages";
 import { useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
@@ -14,10 +15,18 @@ const Hook = () => {
     };
     insertNote(note)
       .then(() => {
-        alert();
+        EventBus.emit("alert", {
+          isShow: true,
+          type: "success",
+          message: INSERT_SUCCESS_MESSAGE,
+        });
       })
-      .catch(() => {
-        //
+      .catch((error) => {
+        EventBus.emit("alert", {
+          isShow: true,
+          type: "error",
+          message: error,
+        });
       });
   };
 

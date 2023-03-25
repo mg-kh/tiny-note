@@ -45,7 +45,7 @@ const SideBar = memo(function SideBar({ editBtn, saveBtn }) {
           ifBlock={
             <button
               className="btn btn-outline btn-sm"
-              data-set-theme="light"
+              data-set-theme="dark"
               onClick={() => setTheme("dark")}
             >
               <i className="w-3">

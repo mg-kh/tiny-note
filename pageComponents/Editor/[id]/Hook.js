@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { getSingleNote, replaceNote } from "@/services/tinyNote.service";
+import { UPDATE_SUCCESS_MESSAGE } from "@/utils/infoMessages";
 
 const Hook = () => {
   const ref = useRef();
@@ -18,7 +19,11 @@ const Hook = () => {
     };
     replaceNote(id, data)
       .then(() => {
-        //
+        EventBus.emit("alert", {
+          isShow: true,
+          type: "success",
+          message: UPDATE_SUCCESS_MESSAGE,
+        });
       })
       .catch(() => {
         //

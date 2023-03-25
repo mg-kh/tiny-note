@@ -12,7 +12,21 @@
     padding : 0px !important;
 }
 .ql-toolbar {
-    margin-bottom: 10px;
+    position: sticky;
+    top : 10px;
+    background-color: red;
+    z-index: 10;
+    box-shadow: 0px 3px 16px 0px #0000001f;
+    padding : 5px!important;
+    border-radius: 8px;
+    display: inline-block;
+}
+[data-theme=winter] .ql-toolbar{
+    background-color: white;
+
+}
+[data-theme=dark] .ql-toolbar {
+    background-color: #3a404c;
 }
 .ql-editor{
     padding : 0!important;
