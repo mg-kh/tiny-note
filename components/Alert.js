@@ -27,8 +27,8 @@ const Alert = () => {
         <IfElse
           isTrue={alertType === "success"}
           ifBlock={
-            <div className="toast toast-top toast-end w-32">
-              <div className="alert alert-success shadow-lg py-2 rounded-md">
+            <div className="toast toast-top toast-end">
+              <div className="alert-success shadow-lg py-2 rounded-md w-64 flex px-2 gap-3 items-center">
                 <div className="p-1 bg-green-600 rounded-full">
                   <FiCheck className="stroke-white" />
                 </div>
@@ -38,7 +38,7 @@ const Alert = () => {
           }
           elseBlock={
             <div className="toast toast-top toast-end w-32">
-              <div className="alert alert-error shadow-lg py-2 rounded-md">
+              <div className="alert alert-error py-2 rounded-md w-64 flex px-2 gap-3 items-center">
                 <div className="p-1 bg-red-600 rounded-full">
                   <FiAlertOctagon className="stroke-white" />
                 </div>
