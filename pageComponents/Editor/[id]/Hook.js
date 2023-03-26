@@ -6,6 +6,7 @@ import { UPDATE_SUCCESS_MESSAGE } from "@/utils/infoMessages";
 const Hook = () => {
   const ref = useRef();
   const [body, setBody] = useState();
+  const [color, setColor] = useState("#D9E3F0");
   const router = useRouter();
   const {
     query: { id },
@@ -16,6 +17,7 @@ const Hook = () => {
       id,
       title: ref.current.value,
       body,
+      color,
     };
     replaceNote(id, data)
       .then(() => {
@@ -33,6 +35,7 @@ const Hook = () => {
       .then((note) => {
         ref.current.value = note?.title;
         setBody(note?.body);
+        setColor(note?.color);
       })
       .catch(() => {
         //
@@ -46,9 +49,11 @@ const Hook = () => {
   return {
     ref,
     body,
+    color,
     // actions
     setBody,
     handleSave,
+    setColor,
   };
 };
 

@@ -28,6 +28,11 @@
 [data-theme=dark] .ql-toolbar {
     background-color: #3a404c;
 }
+.ql-editor.ql-blank::before{
+    color : #a3a3a3!important;
+    left : 0px!important;
+    right : 0px!important;
+}
 .ql-editor{
     padding : 0px!important;
     min-height: 100px;
@@ -46,4 +51,18 @@
 }
 .ql-picker-label{
     color : #a3a3a3!important;
+}
+
+/* ----- color picker overrides ----- */
+.github-picker{
+    flex-wrap: nowrap!important;
+    width : fit-content!important;
+    gap : 2px !important;
+    border: none!important;
+}
+[data-theme=winter] .github-picker{
+    background-color: white!important;
+}
+[data-theme=dark] .github-picker{
+    background-color: #3a404c!important;
 }

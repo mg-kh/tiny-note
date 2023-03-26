@@ -1,15 +1,15 @@
-import React from "react";
-import Link from "next/link";
 import isEmpty from "lodash/isEmpty";
+import Link from "next/link";
+import React from "react";
 
-import MainLayout from "@/layouts/MainLayout";
 import IfElse from "@/components/IfElse";
+import NoteCard from "@/components/NoteCard";
+import MainLayout from "@/layouts/MainLayout";
 
-import { FiTrash2, FiPlus, FiRotateCcw } from "react-icons/fi";
+import { FiPlus, FiRotateCcw } from "react-icons/fi";
 
+import { EDITOR } from "@/utils/locationPathName";
 import Hook from "./Hook";
-import { EDITOR, MY_NOTES } from "@/utils/locationPathName";
-import { key } from "localforage";
 
 const MyNotes = () => {
   const {
@@ -35,14 +35,14 @@ const MyNotes = () => {
                       isTrue={isEmpty(notes)}
                       ifBlock={
                         <>
-                          <div className="text-center py-10 border border-dashed border-gray-500 rounded-md">
+                          <div className="py-10 text-center border border-gray-500 border-dashed rounded-md">
                             <h3 className="mb-5 text-2xl">
                               Can't find note title{" "}
                               <span className="badge"> {keyword}</span>
                             </h3>
                             <button
                               onClick={handleCancelSearch}
-                              className="btn btn-sm gap-3 btn-outline"
+                              className="gap-3 btn btn-sm btn-outline"
                             >
                               <FiRotateCcw />
                               <span>Try again</span>
@@ -66,23 +66,12 @@ const MyNotes = () => {
                             </div>
                           </div>
                           {notes?.map((note) => (
-                            <div
-                              key={note?.id}
-                              className="flex items-center gap-2"
-                            >
-                              <button
+                            <React.Fragment key={note?.id}>
+                              <NoteCard
                                 onClick={() => handleRemoveSingleNote(note.id)}
-                                className="btn btn-ghost btn-sm"
-                              >
-                                <FiTrash2 />
-                              </button>
-                              <Link
-                                href={`${MY_NOTES}/${note.id}`}
-                                key={note.id}
-                              >
-                                <span>{note.title}</span>
-                              </Link>
-                            </div>
+                                note={note}
+                              />
+                            </React.Fragment>
                           ))}
                         </>
                       }
@@ -95,12 +84,12 @@ const MyNotes = () => {
                       isTrue={isEmpty(notes)}
                       ifBlock={
                         <>
-                          <div className="text-center py-10 border border-dashed border-gray-500 rounded-md">
+                          <div className="py-10 text-center border border-gray-500 border-dashed rounded-md">
                             <h3 className="mb-5 text-2xl">
                               Start Taking New Notes
                             </h3>
                             <Link href={EDITOR}>
-                              <button className="btn btn-sm gap-3 btn-outline">
+                              <button className="gap-3 btn btn-sm btn-outline">
                                 <FiPlus />
                                 <span>Add New Note</span>
                               </button>
@@ -124,23 +113,12 @@ const MyNotes = () => {
                             </div>
                           </div>
                           {notes?.map((note) => (
-                            <div
-                              key={note?.id}
-                              className="flex items-center gap-2"
-                            >
-                              <button
+                            <React.Fragment key={note?.id}>
+                              <NoteCard
                                 onClick={() => handleRemoveSingleNote(note.id)}
-                                className="btn btn-ghost btn-sm"
-                              >
-                                <FiTrash2 />
-                              </button>
-                              <Link
-                                href={`${MY_NOTES}/${note.id}`}
-                                key={note.id}
-                              >
-                                <span>{note.title}</span>
-                              </Link>
-                            </div>
+                                note={note}
+                              />
+                            </React.Fragment>
                           ))}
                         </>
                       }

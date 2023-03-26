@@ -11,9 +11,11 @@ const EditNote = () => {
   const {
     ref,
     body,
+    color,
     // actions
     setBody,
     handleSave,
+    setColor,
   } = Hook();
   return (
     <MainLayout
@@ -29,7 +31,13 @@ const EditNote = () => {
       }
       main={
         <>
-          <RTEditor body={body} setBody={setBody} ref={ref} />
+          <RTEditor
+            color={color}
+            setColor={setColor}
+            body={body}
+            setBody={setBody}
+            ref={ref}
+          />
         </>
       }
     />

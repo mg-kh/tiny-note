@@ -5,13 +5,16 @@ import { v4 as uuidv4 } from "uuid";
 
 const Hook = () => {
   const [body, setBody] = useState("");
+  const [color, setColor] = useState("#D9E3F0");
   const ref = useRef();
+  const [isShowModal, setIsShowModal] = useState(false);
 
   const handleInsertNote = () => {
     const note = {
       id: uuidv4(),
       title: ref.current.value,
       body,
+      color,
     };
     insertNote(note)
       .then(() => {
@@ -21,6 +24,7 @@ const Hook = () => {
         });
         setBody("");
         ref.current.value = "";
+        setColor("#D9E3F0");
       })
       .catch((error) => {
         EventBus.emit("alert", {
@@ -32,10 +36,14 @@ const Hook = () => {
 
   return {
     ref,
+    color,
     body,
+    isShowModal,
     // actions
     setBody,
     handleInsertNote,
+    setIsShowModal,
+    setColor,
   };
 };
 
