@@ -53,6 +53,18 @@ export const searchByTitle = async (keyword) => {
     return GENERAL_ERROR_MESSAGE;
   }
 };
+export const searchByColor = async (color) => {
+  try {
+    const allNotes = await GetAllNotes();
+    const filterNotes = filter(
+      cloneDeep(allNotes),
+      (note) => note?.color === color
+    );
+    return filterNotes;
+  } catch (error) {
+    return GENERAL_ERROR_MESSAGE;
+  }
+};
 
 export const removeSingleNote = async (id) => {
   try {
