@@ -3,12 +3,9 @@ import { themeChange } from "theme-change";
 
 import IfElse from "./IfElse";
 
-import { FiMenu, FiMoon, FiPlus, FiSun } from "react-icons/fi";
+import { FiMoon, FiSun } from "react-icons/fi";
 
-import { EDITOR, MY_NOTES } from "@/utils/locationPathName";
-import Link from "next/link";
-
-const SideBar = memo(function SideBar({ editBtn, saveBtn }) {
+const SideBar = memo(function SideBar({ editBtn, addBtn, myNoteBtn }) {
   const [theme, setTheme] = useState("");
   useEffect(() => {
     themeChange(false);
@@ -17,29 +14,11 @@ const SideBar = memo(function SideBar({ editBtn, saveBtn }) {
   }, []);
 
   return (
-    <div className="card">
-      <Link className="pb-2" href={EDITOR}>
-        <button className="gap-2 btn btn-sm btn-outline btn-block">
-          <i className="w-4">
-            <FiPlus className="w-full h-full" />
-          </i>
-          <span>New Note</span>
-        </button>
-      </Link>
-      <div className="py-2 card-actions">
+    <>
+      <div className="flex gap-2 flex-nowrap">
+        {myNoteBtn}
+        {addBtn}
         {editBtn}
-        <Link href={MY_NOTES}>
-          <div className="tooltip hover:tooltip-open" data-tip="All Notes">
-            <button className="btn btn-sm btn-outline btn-square">
-              <i className="w-4">
-                <FiMenu className="w-full h-full" />
-              </i>
-            </button>
-          </div>
-        </Link>
-        {saveBtn}
-      </div>
-      <div className="py-2 card-actions">
         <IfElse
           isTrue={theme === "winter"}
           ifBlock={
@@ -66,7 +45,7 @@ const SideBar = memo(function SideBar({ editBtn, saveBtn }) {
           }
         />
       </div>
-    </div>
+    </>
   );
 });
 

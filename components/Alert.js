@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FiAlertOctagon, FiCheck } from "react-icons/fi";
 
-import useEventBus from "@/hooks/useEventBus";
+import useEventBus from "event-bus-react";
 
 import IfElse from "./IfElse";
 

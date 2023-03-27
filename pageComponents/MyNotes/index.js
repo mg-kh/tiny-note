@@ -2,6 +2,7 @@ import isEmpty from "lodash/isEmpty";
 import Link from "next/link";
 import React from "react";
 import { GithubPicker } from "react-color";
+import cn from "classnames";
 
 import IfElse from "@/components/IfElse";
 import NoteCard from "@/components/NoteCard";
@@ -27,41 +28,63 @@ const MyNotes = () => {
   return (
     <>
       <MainLayout
+        addBtn={
+          <Link href={EDITOR}>
+            <button className="btn btn-sm btn-outline btn-square">
+              <i className="w-4">
+                <FiPlus className="w-full h-full" />
+              </i>
+            </button>
+          </Link>
+        }
         main={
           <>
             <IfElse
               isTrue={isEmpty(notes)}
               ifBlock={
                 <>
-                  <div className="w-full h-[50vh]  flex items-center justify-center">
-                    <div className="">
-                      <p className="text-center text-3xl text-gray-600">
-                        Add New Notes
-                      </p>
-                      <p className="text-center text-gray-600">
-                        You haven't take any note yet!.
-                      </p>
-                    </div>
+                  <div className="">
+                    <p className="text-3xl mb-5">My Notes</p>
+                    <p className="">
+                      You haven't create any note yet.{" "}
+                      <Link href={EDITOR}>
+                        <u className="text-blue-400">Create new note now.</u>
+                      </Link>
+                    </p>
                   </div>
                 </>
               }
               elseBlock={
                 <>
                   <div className="">
-                    <div className="flex gap-2 border border-gray-200 rounded-md w-fit px-2">
-                      <input
-                        type="text"
-                        placeholder="Search Note"
-                        className="input input-sm focus:outline-none"
-                        onChange={(e) => {
-                          handleSearchByTitle(e.target.value);
-                        }}
-                      />
-                      {keyword && (
-                        <button onClick={handleCancelSearch}>
-                          <FiX />
-                        </button>
-                      )}
+                    <div className="">
+                      <div className="">
+                        <label
+                          className={cn({
+                            "input-group": keyword,
+                          })}
+                        >
+                          <input
+                            type="text"
+                            placeholder="Search notes ..."
+                            className="input input-bordered focus:outline-none input-sm"
+                            onChange={(e) => {
+                              handleSearchByTitle(e.target.value);
+                            }}
+                          />
+
+                          <span
+                            className={cn(
+                              { hidden: !keyword },
+                              { static: keyword }
+                            )}
+                          >
+                            <button onClick={handleCancelSearch}>
+                              <FiX />
+                            </button>
+                          </span>
+                        </label>
+                      </div>
                     </div>
 
                     {/* ----- color picker ----- */}
@@ -78,7 +101,7 @@ const MyNotes = () => {
                               handleSearchByColor(color.hex);
                             }}
                             colors={[
-                              "#D9E3F0",
+                              "#d9e3f0",
                               "#22c55e",
                               "#ea580c",
                               "#1d4ed8",
@@ -89,11 +112,12 @@ const MyNotes = () => {
                         </div>
                       </div>
                       <p className="text-xs">Filter By Color</p>
-                      {color && (
-                        <button onClick={handleCancelSearch}>
-                          <FiX />
-                        </button>
-                      )}
+                      <button
+                        className={cn({ hidden: !color })}
+                        onClick={handleCancelSearch}
+                      >
+                        <FiX />
+                      </button>
                     </div>
 
                     {/* ----- total ----- */}

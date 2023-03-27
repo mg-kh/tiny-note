@@ -8,7 +8,7 @@ import { FiMenu, FiMoon, FiPlus, FiSun } from "react-icons/fi";
 import { EDITOR, MY_NOTES } from "@/utils/locationPathName";
 import Link from "next/link";
 
-const Footer = memo(function Footer({ editBtn, saveBtn }) {
+const Footer = memo(function Footer({ editBtn, addBtn, myNoteBtn }) {
   const [theme, setTheme] = useState("");
   useEffect(() => {
     themeChange(false);
@@ -18,24 +18,9 @@ const Footer = memo(function Footer({ editBtn, saveBtn }) {
 
   return (
     <div className="py-2 flex justify-center gap-3">
-      <Link href={MY_NOTES}>
-        <div className="tooltip hover:tooltip-open" data-tip="All Notes">
-          <button className="btn btn-sm btn-outline btn-square">
-            <i className="w-4">
-              <FiMenu className="w-full h-full" />
-            </i>
-          </button>
-        </div>
-      </Link>
+      {myNoteBtn}
       {editBtn}
-      <Link href={EDITOR}>
-        <button className="btn btn-sm btn-outline btn-square">
-          <i className="w-4">
-            <FiPlus className="w-full h-full" />
-          </i>
-        </button>
-      </Link>
-      {saveBtn}
+      {addBtn}
       <IfElse
         isTrue={theme === "winter"}
         ifBlock={

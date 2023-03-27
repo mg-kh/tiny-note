@@ -1,6 +1,10 @@
 import { GENERAL_ERROR_MESSAGE } from "@/utils/infoMessages";
 import { ClearNotes, GetAllNotes, InsertNotes } from "@/utils/storage";
-import { cloneDeep, filter, findIndex, includes, lowerCase } from "lodash";
+import cloneDeep from "lodash/cloneDeep";
+import filter from "lodash/filter";
+import findIndex from "lodash/findIndex";
+import includes from "lodash/includes";
+import lowerCase from "lodash/lowerCase";
 
 export const insertNote = async (data) => {
   try {
@@ -58,7 +62,7 @@ export const searchByColor = async (color) => {
     const allNotes = await GetAllNotes();
     const filterNotes = filter(
       cloneDeep(allNotes),
-      (note) => note?.color === color
+      (note) => lowerCase(note?.color) === lowerCase(color)
     );
     return filterNotes;
   } catch (error) {

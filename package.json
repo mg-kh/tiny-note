@@ -9,7 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "classnames": "^2.3.2",
     "daisyui": "^2.51.5",
+    "event-bus-react": "^0.0.3",
     "localforage": "^1.10.0",
     "lodash": "^4.17.21",
     "next": "13.2.4",
