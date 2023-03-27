@@ -78,6 +78,7 @@ const MyNotes = () => {
                               handleSearchByColor(color.hex);
                             }}
                             colors={[
+                              "#D9E3F0",
                               "#22c55e",
                               "#ea580c",
                               "#1d4ed8",

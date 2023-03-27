@@ -1,8 +1,6 @@
-import { forwardRef } from "react";
 import dynamic from "next/dynamic";
+import { GithubPicker } from "react-color";
 import "react-quill/dist/quill.snow.css";
-import { SketchPicker } from "react-color";
-import { BlockPicker, GithubPicker, SliderPicker } from "react-color";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
@@ -14,19 +12,31 @@ const formats = [
   [{ color: [] }, { background: [] }],
 ];
 
-const RTEditor = forwardRef(function RTEditor(
-  { body, setBody, readOnly = false, color, setColor },
-  ref
-) {
+const RTEditor = ({
+  title,
+  setTitle,
+  body,
+  setBody,
+  readOnly = false,
+  color,
+  setColor,
+}) => {
   return (
     <div>
       <div className="">
+        {!readOnly && (
+          <div className="badge gap-2 py-2 mb-1">
+            <p className="text-xs">auto saving</p>
+          </div>
+        )}
+
         <input
           disabled={readOnly}
-          ref={ref}
           type="text"
+          defaultValue={title}
           placeholder="Title Here ..."
           className="w-full p-0 text-xl font-bold bg-transparent focus:outline-none"
+          onChange={(e) => setTitle(e.target.value)}
         />
 
         {!readOnly && (
@@ -71,6 +81,6 @@ const RTEditor = forwardRef(function RTEditor(
       />
     </div>
   );
-});
+};
 
 export default RTEditor;

@@ -1,59 +1,62 @@
-import { useRef, useState, useEffect } from "react";
-import { useRouter } from "next/router";
 import { getSingleNote, replaceNote } from "@/services/tinyNote.service";
 import { UPDATE_SUCCESS_MESSAGE } from "@/utils/infoMessages";
+import { useRouter } from "next/router";
+import { useCallback, useEffect, useState } from "react";
 
 const Hook = () => {
-  const ref = useRef();
-  const [body, setBody] = useState();
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
   const [color, setColor] = useState("#D9E3F0");
   const router = useRouter();
   const {
     query: { id },
   } = router;
 
-  const handleSave = () => {
+  const handleSave = useCallback(() => {
     const data = {
       id,
-      title: ref.current.value,
+      title,
       body,
       color,
     };
     replaceNote(id, data)
       .then(() => {
-        EventBus.emit("alert", {
-          type: "success",
-          message: UPDATE_SUCCESS_MESSAGE,
-        });
+        //
       })
       .catch(() => {
         //
       });
-  };
-  const handleGetSingleNote = () => {
+  }, [title, body, color]);
+
+  const handleGetSingleNote = useCallback(() => {
     getSingleNote(id)
       .then((note) => {
-        ref.current.value = note?.title;
+        setTitle(note?.title);
         setBody(note?.body);
         setColor(note?.color);
       })
       .catch(() => {
         //
       });
-  };
+  }, []);
 
   useEffect(() => {
     handleGetSingleNote();
   }, [id]);
 
+  useEffect(() => {
+    handleSave();
+  }, [title, body, color]);
+
   return {
-    ref,
+    title,
     body,
     color,
     // actions
     setBody,
     handleSave,
     setColor,
+    setTitle,
   };
 };
 

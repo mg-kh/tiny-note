@@ -7,29 +7,20 @@ import Hook from "./Hook";
 
 const Editor = () => {
   const {
-    ref,
+    title,
     color,
     body,
     isShowModal,
+    isAutoSaving,
     // actions
     setBody,
-    handleInsertNote,
     setIsShowModal,
     setColor,
+    setTitle,
   } = Hook();
   return (
     <>
       <MainLayout
-        saveBtn={
-          <div className="tooltip hover:tooltip-open" data-tip="Save">
-            <button
-              onClick={handleInsertNote}
-              className="btn btn-sm btn-outline btn-square "
-            >
-              <IoSaveOutline />
-            </button>
-          </div>
-        }
         main={
           <>
             <div className={`modal ${isShowModal && "modal-open"}`}>
@@ -61,7 +52,8 @@ const Editor = () => {
               </div>
             </div>
             <RTEditor
-              ref={ref}
+              title={title}
+              setTitle={setTitle}
               color={color}
               setColor={setColor}
               body={body}

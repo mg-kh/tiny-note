@@ -1,34 +1,20 @@
-import React from "react";
-
-import { IoSaveOutline } from "react-icons/io5";
-
-import MainLayout from "@/layouts/MainLayout";
 import RTEditor from "@/components/RTEditor";
+import MainLayout from "@/layouts/MainLayout";
 
 import Hook from "./Hook";
 
 const EditNote = () => {
   const {
-    ref,
+    title,
     body,
     color,
     // actions
     setBody,
-    handleSave,
     setColor,
+    setTitle,
   } = Hook();
   return (
     <MainLayout
-      saveBtn={
-        <div className="tooltip hover:tooltip-open" data-tip="Save">
-          <button
-            onClick={handleSave}
-            className="btn btn-sm btn-outline btn-square"
-          >
-            <IoSaveOutline />
-          </button>
-        </div>
-      }
       main={
         <>
           <RTEditor
@@ -36,7 +22,8 @@ const EditNote = () => {
             setColor={setColor}
             body={body}
             setBody={setBody}
-            ref={ref}
+            title={title}
+            setTitle={setTitle}
           />
         </>
       }

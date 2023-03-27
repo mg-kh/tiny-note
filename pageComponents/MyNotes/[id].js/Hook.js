@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { EDITOR } from "@/utils/locationPathName";
 
 const Hook = () => {
-  const ref = useRef();
+  const [title, setTitle] = useState("");
   const [body, setBody] = useState();
   const router = useRouter();
   const {
@@ -14,7 +14,7 @@ const Hook = () => {
   const handleGetSingleNote = useCallback(() => {
     getSingleNote(id)
       .then((note) => {
-        ref.current.value = note?.title;
+        setTitle(note?.title);
         setBody(note?.body);
       })
       .catch((e) => {
@@ -31,7 +31,7 @@ const Hook = () => {
   }, [id]);
 
   return {
-    ref,
+    title,
     body,
     // action
     setBody,

@@ -7,7 +7,7 @@ import MainLayout from "@/layouts/MainLayout";
 
 const SingleNote = () => {
   const {
-    ref,
+    title,
     body,
     //action
     setBody,
@@ -30,7 +30,12 @@ const SingleNote = () => {
       }
       main={
         <>
-          <RTEditor ref={ref} body={body} setBody={setBody} readOnly={true} />
+          <RTEditor
+            title={title}
+            body={body}
+            setBody={setBody}
+            readOnly={true}
+          />
         </>
       }
     />
