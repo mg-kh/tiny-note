@@ -15,9 +15,8 @@ const Alert = () => {
     setIsShowAlert(true);
     setAlertType(type);
     setAlertMessage(message);
-    const interval = setInterval(() => {
+    const timeout = setTimeout(() => {
       setIsShowAlert(false);
-      clearInterval(interval);
     }, 1500);
   });
 
@@ -28,7 +27,7 @@ const Alert = () => {
           isTrue={alertType === "success"}
           ifBlock={
             <div className="toast toast-top toast-end">
-              <div className="alert-success shadow-lg py-2 rounded-md w-64 flex px-2 gap-3 items-center">
+              <div className="flex items-center w-64 gap-3 px-2 py-2 rounded-md shadow-lg alert-success">
                 <div className="p-1 bg-green-600 rounded-full">
                   <FiCheck className="stroke-white" />
                 </div>
@@ -37,8 +36,8 @@ const Alert = () => {
             </div>
           }
           elseBlock={
-            <div className="toast toast-top toast-end w-32">
-              <div className="alert alert-error py-2 rounded-md w-64 flex px-2 gap-3 items-center">
+            <div className="w-32 toast toast-top toast-end">
+              <div className="flex items-center w-64 gap-3 px-2 py-2 rounded-md alert alert-error">
                 <div className="p-1 bg-red-600 rounded-full">
                   <FiAlertOctagon className="stroke-white" />
                 </div>

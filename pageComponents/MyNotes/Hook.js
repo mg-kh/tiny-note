@@ -1,27 +1,28 @@
-import { useEffect, useState, useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 
-import {
-  getAllNotes,
-  removeSingleNote,
-  searchByColor,
-  searchByTitle,
-} from "@/services/tinyNote.service";
+import { getAllNotes, removeSingleNote } from "@/services/tinyNote.service";
 import {
   DELETE_SUCCESS_MESSAGE,
   NOT_FOUND_MESSAGE,
 } from "@/utils/infoMessages";
+import cloneDeep from "lodash/cloneDeep";
+import filter from "lodash/filter";
+import includes from "lodash/includes";
+import lowerCase from "lodash/lowerCase";
 import isEmpty from "lodash/isEmpty";
 import debounce from "lodash/debounce";
 
 const Hook = () => {
   const [notes, setNotes] = useState([]);
-  const [keyword, setKeyword] = useState(null);
-  const [color, setColor] = useState(null);
+  const [keyword, setKeyword] = useState("");
+  const [color, setColor] = useState("");
+  const [resultNote, setResultNote] = useState([]);
 
   const handleGetAllNotes = useCallback(() => {
     getAllNotes()
       .then((notes) => {
         setNotes(notes);
+        setResultNote(notes);
       })
       .catch();
   }, []);
@@ -40,46 +41,32 @@ const Hook = () => {
       });
   };
 
-  const handleSearchByColor = (color) => {
-    setColor(color);
-    searchByColor(color)
-      .then((notes) => {
-        if (!isEmpty(notes)) {
-          setNotes(notes);
-        }
-      })
-      .catch(() => {
-        //
-      });
+  const handleCancelColorSearch = () => {
+    setColor("");
   };
 
-  const handleSearchByTitle = debounce((keyword) => {
-    setKeyword(keyword);
-    searchByTitle(keyword)
-      .then((notes) => {
-        if (!isEmpty(notes)) {
-          setNotes(notes);
-        } else {
-          EventBus.emit("alert", {
-            type: "success",
-            message: NOT_FOUND_MESSAGE,
-          });
-        }
-      })
-      .catch(() => {
-        //
-      });
-  }, 100);
-
-  const handleCancelSearch = () => {
-    setKeyword(null);
-    setColor(null);
-    handleGetAllNotes();
+  const handleCancelTitleSearch = () => {
+    setKeyword("");
   };
 
   useEffect(() => {
     handleGetAllNotes();
   }, []);
+
+  useEffect(() => {
+    const clonedNotes = cloneDeep(resultNote);
+    const filteredNotes = filter(clonedNotes, (note) => {
+      return (
+        includes(lowerCase(note.color), lowerCase(color)) &&
+        includes(lowerCase(note.title), lowerCase(keyword))
+      );
+    });
+    if (isEmpty(filteredNotes)) {
+      //
+    } else {
+      setNotes(filteredNotes);
+    }
+  }, [color, keyword]);
 
   return {
     notes,
@@ -87,9 +74,10 @@ const Hook = () => {
     color,
     // actions
     handleRemoveSingleNote,
-    handleSearchByTitle,
-    handleCancelSearch,
-    handleSearchByColor,
+    handleCancelColorSearch,
+    handleCancelTitleSearch,
+    setKeyword,
+    setColor,
   };
 };
 

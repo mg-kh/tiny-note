@@ -20,9 +20,10 @@ const MyNotes = () => {
     color,
     //action
     handleRemoveSingleNote,
-    handleSearchByTitle,
-    handleCancelSearch,
-    handleSearchByColor,
+    handleCancelColorSearch,
+    handleCancelTitleSearch,
+    setKeyword,
+    setColor,
   } = Hook();
 
   return (
@@ -44,7 +45,7 @@ const MyNotes = () => {
               ifBlock={
                 <>
                   <div className="">
-                    <p className="text-3xl mb-5">My Notes</p>
+                    <p className="mb-5 text-3xl">My Notes</p>
                     <p className="">
                       You haven't create any note yet.{" "}
                       <Link href={EDITOR}>
@@ -57,6 +58,7 @@ const MyNotes = () => {
               elseBlock={
                 <>
                   <div className="">
+                    {/* ----- search notes ----- */}
                     <div className="">
                       <div className="">
                         <label
@@ -67,9 +69,10 @@ const MyNotes = () => {
                           <input
                             type="text"
                             placeholder="Search notes ..."
-                            className="input input-bordered focus:outline-none input-sm"
+                            value={keyword}
+                            className="focus:outline-none input input-bordered input-sm"
                             onChange={(e) => {
-                              handleSearchByTitle(e.target.value);
+                              setKeyword(e.target.value);
                             }}
                           />
 
@@ -79,7 +82,7 @@ const MyNotes = () => {
                               { static: keyword }
                             )}
                           >
-                            <button onClick={handleCancelSearch}>
+                            <button onClick={handleCancelTitleSearch}>
                               <FiX />
                             </button>
                           </span>
@@ -93,12 +96,12 @@ const MyNotes = () => {
                         <div
                           tabIndex={0}
                           style={{ backgroundColor: color }}
-                          className="w-8 h-4 rounded-md border cursor-pointer"
+                          className="w-8 h-4 border rounded-md cursor-pointer"
                         ></div>
-                        <div className="dropdown-content menu pt-2 border-none rounded-box w-52">
+                        <div className="pt-2 border-none dropdown-content menu rounded-box w-52">
                           <GithubPicker
                             onChange={(color) => {
-                              handleSearchByColor(color.hex);
+                              setColor(color.hex);
                             }}
                             colors={[
                               "#d9e3f0",
@@ -114,7 +117,7 @@ const MyNotes = () => {
                       <p className="text-xs">Filter By Color</p>
                       <button
                         className={cn({ hidden: !color })}
-                        onClick={handleCancelSearch}
+                        onClick={handleCancelColorSearch}
                       >
                         <FiX />
                       </button>
@@ -124,11 +127,12 @@ const MyNotes = () => {
                     <div className="pt-3">
                       <span className="text-sm">Total : </span>
                       <span className="badge badge-outline">
-                        <span className="text-xs px-2">{notes?.length}</span>
+                        <span className="px-2 text-xs">{notes?.length}</span>
                       </span>
                     </div>
                   </div>
-                  <div className="divider my-1"></div>
+                  <div className="my-1 divider"></div>
+                  {/* {console.log({ notes })} */}
                   {notes?.map((note) => (
                     <React.Fragment key={note?.id}>
                       <NoteCard
