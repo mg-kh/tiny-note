@@ -8,10 +8,12 @@ const EditNote = () => {
     title,
     body,
     color,
+    isAutoSaving,
     // actions
     setBody,
     setColor,
     setTitle,
+    setIsAutoSaving,
   } = Hook();
   return (
     <MainLayout
@@ -24,6 +26,8 @@ const EditNote = () => {
             setBody={setBody}
             title={title}
             setTitle={setTitle}
+            isAutoSaving={isAutoSaving}
+            setIsAutoSaving={setIsAutoSaving}
           />
         </>
       }

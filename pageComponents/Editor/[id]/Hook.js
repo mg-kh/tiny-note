@@ -7,6 +7,7 @@ const Hook = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [color, setColor] = useState("#D9E3F0");
+  const [isAutoSaving, setIsAutoSaving] = useState(false);
   const router = useRouter();
   const {
     query: { id },
@@ -52,11 +53,13 @@ const Hook = () => {
     title,
     body,
     color,
+    isAutoSaving,
     // actions
     setBody,
     handleSave,
     setColor,
     setTitle,
+    setIsAutoSaving,
   };
 };
 

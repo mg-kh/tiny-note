@@ -1,14 +1,14 @@
+import cn from "classnames";
 import isEmpty from "lodash/isEmpty";
 import Link from "next/link";
 import React from "react";
 import { GithubPicker } from "react-color";
-import cn from "classnames";
 
 import IfElse from "@/components/IfElse";
 import NoteCard from "@/components/NoteCard";
 import MainLayout from "@/layouts/MainLayout";
 
-import { FiPlus, FiRotateCcw, FiX } from "react-icons/fi";
+import { FiX } from "react-icons/fi";
 
 import { EDITOR } from "@/utils/locationPathName";
 import Hook from "./Hook";
@@ -29,15 +29,6 @@ const MyNotes = () => {
   return (
     <>
       <MainLayout
-        addBtn={
-          <Link href={EDITOR}>
-            <button className="btn btn-sm btn-outline btn-square">
-              <i className="w-4">
-                <FiPlus className="w-full h-full" />
-              </i>
-            </button>
-          </Link>
-        }
         main={
           <>
             <IfElse

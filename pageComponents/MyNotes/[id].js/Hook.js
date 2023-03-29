@@ -1,7 +1,6 @@
 import { getSingleNote } from "@/services/tinyNote.service";
-import { useRef, useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/router";
-import { EDITOR } from "@/utils/locationPathName";
+import { useCallback, useEffect, useState } from "react";
 
 const Hook = () => {
   const [title, setTitle] = useState("");
@@ -22,10 +21,6 @@ const Hook = () => {
       });
   }, [id]);
 
-  const handleGoToEdit = () => {
-    router.push(`${EDITOR}/${id}`);
-  };
-
   useEffect(() => {
     handleGetSingleNote();
   }, [id]);
@@ -35,7 +30,6 @@ const Hook = () => {
     body,
     // action
     setBody,
-    handleGoToEdit,
   };
 };
 

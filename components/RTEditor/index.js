@@ -1,6 +1,8 @@
 import dynamic from "next/dynamic";
 import { GithubPicker } from "react-color";
 import "react-quill/dist/quill.snow.css";
+import { FiRefreshCw } from "react-icons/fi";
+import cn from "classnames";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
@@ -8,8 +10,8 @@ const formats = [
   ["bold", "italic", "underline", "strike", "link"],
   [{ header: [1, 2, 3, false] }],
   ["blockquote", "code-block"],
-  [{ list: "ordered" }, { list: "bullet" }],
   [{ color: [] }, { background: [] }],
+  [{ list: "ordered" }, { list: "bullet" }],
 ];
 
 const RTEditor = ({
@@ -20,12 +22,17 @@ const RTEditor = ({
   readOnly = false,
   color,
   setColor,
+  isAutoSaving,
+  setIsAutoSaving = () => {},
 }) => {
   return (
     <div>
       <div className="">
         {!readOnly && (
-          <div className="badge gap-2 py-2 mb-1">
+          <div className="gap-2 py-2 mb-1 badge badge-outline">
+            <i className={cn({ "animate-spin": isAutoSaving })}>
+              <FiRefreshCw />
+            </i>
             <p className="text-xs">auto saving</p>
           </div>
         )}
@@ -37,6 +44,8 @@ const RTEditor = ({
           placeholder="Title Here ..."
           className="w-full p-0 text-xl font-bold bg-transparent focus:outline-none"
           onChange={(e) => setTitle(e.target.value)}
+          onClick={() => setIsAutoSaving(true)}
+          onBlur={() => setIsAutoSaving(false)}
         />
 
         {!readOnly && (
@@ -45,12 +54,16 @@ const RTEditor = ({
               <div
                 tabIndex={0}
                 style={{ backgroundColor: color }}
-                className="w-8 h-4 rounded-md border cursor-pointer"
+                className="w-8 h-4 border rounded-md cursor-pointer"
               ></div>
-              <div className="dropdown-content menu pt-2 border-none rounded-box w-52">
+              <div className="pt-2 border-none dropdown-content menu rounded-box w-52">
                 <GithubPicker
+                  onChangeComplete={() =>
+                    setTimeout(() => setIsAutoSaving(false), 100)
+                  }
                   onChange={(color) => {
                     setColor(color.hex);
+                    setIsAutoSaving(true);
                   }}
                   colors={[
                     "#22c55e",
@@ -70,6 +83,8 @@ const RTEditor = ({
       </div>
       {readOnly && <div className="divider my-0.5"></div>}
       <ReactQuill
+        onFocus={() => setIsAutoSaving(true)}
+        onBlur={() => setIsAutoSaving(false)}
         readOnly={readOnly}
         theme="snow"
         value={body}

@@ -13,8 +13,8 @@ const Hook = () => {
   const [body, setBody] = useState("");
   const [color, setColor] = useState("#D9E3F0");
   const [title, setTitle] = useState("");
-  const [isShowModal, setIsShowModal] = useState(false);
   const [id, setId] = useState("");
+  const [isAutoSaving, setIsAutoSaving] = useState(false);
 
   const handleInsertNote = useCallback(() => {
     const note = {
@@ -60,12 +60,12 @@ const Hook = () => {
     color,
     body,
     title,
-    isShowModal,
+    isAutoSaving,
     // actions
     setBody,
-    setIsShowModal,
     setColor,
     setTitle,
+    setIsAutoSaving,
   };
 };
 
