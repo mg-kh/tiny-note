@@ -29,7 +29,7 @@ const RTEditor = ({
     <div>
       <div className="">
         {!readOnly && (
-          <div className="gap-2 py-2 mb-1 badge badge-outline">
+          <div className="gap-2 py-2 mb-2 badge badge-primary">
             <i className={cn({ "animate-spin": isAutoSaving })}>
               <FiRefreshCw />
             </i>
@@ -54,7 +54,7 @@ const RTEditor = ({
               <div
                 tabIndex={0}
                 style={{ backgroundColor: color }}
-                className="w-8 h-4 border rounded-md cursor-pointer"
+                className="w-8 h-4 border rounded-md cursor-pointer border-primary"
               ></div>
               <div className="pt-2 border-none dropdown-content menu rounded-box w-52">
                 <GithubPicker

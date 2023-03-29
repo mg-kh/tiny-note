@@ -1,16 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 
 import { getAllNotes, removeSingleNote } from "@/services/tinyNote.service";
-import {
-  DELETE_SUCCESS_MESSAGE,
-  NOT_FOUND_MESSAGE,
-} from "@/utils/infoMessages";
+import { DELETE_SUCCESS_MESSAGE } from "@/utils/infoMessages";
 import cloneDeep from "lodash/cloneDeep";
 import filter from "lodash/filter";
 import includes from "lodash/includes";
-import lowerCase from "lodash/lowerCase";
 import isEmpty from "lodash/isEmpty";
-import debounce from "lodash/debounce";
+import lowerCase from "lodash/lowerCase";
 
 const Hook = () => {
   const [notes, setNotes] = useState([]);

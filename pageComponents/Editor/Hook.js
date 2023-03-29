@@ -11,7 +11,7 @@ import { v4 as uuidv4 } from "uuid";
 
 const Hook = () => {
   const [body, setBody] = useState("");
-  const [color, setColor] = useState("#D9E3F0");
+  const [color, setColor] = useState("#22c55e");
   const [title, setTitle] = useState("");
   const [id, setId] = useState("");
   const [isAutoSaving, setIsAutoSaving] = useState(false);

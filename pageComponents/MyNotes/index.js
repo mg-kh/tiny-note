@@ -61,7 +61,7 @@ const MyNotes = () => {
                             type="text"
                             placeholder="Search notes ..."
                             value={keyword}
-                            className="focus:outline-none input input-bordered input-sm"
+                            className="focus:outline-none input input-bordered border-primary input-sm"
                             onChange={(e) => {
                               setKeyword(e.target.value);
                             }}
@@ -87,7 +87,7 @@ const MyNotes = () => {
                         <div
                           tabIndex={0}
                           style={{ backgroundColor: color }}
-                          className="w-8 h-4 border rounded-md cursor-pointer"
+                          className="w-8 h-4 border rounded-md cursor-pointer border-primary"
                         ></div>
                         <div className="pt-2 border-none dropdown-content menu rounded-box w-52">
                           <GithubPicker
@@ -95,7 +95,6 @@ const MyNotes = () => {
                               setColor(color.hex);
                             }}
                             colors={[
-                              "#d9e3f0",
                               "#22c55e",
                               "#ea580c",
                               "#1d4ed8",
@@ -117,7 +116,7 @@ const MyNotes = () => {
                     {/* ----- total ----- */}
                     <div className="pt-3">
                       <span className="text-sm">Total : </span>
-                      <span className="badge badge-outline">
+                      <span className="badge border-primary badge-outline">
                         <span className="px-2 text-xs">{notes?.length}</span>
                       </span>
                     </div>

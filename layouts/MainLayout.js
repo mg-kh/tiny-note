@@ -6,7 +6,7 @@ const MainLayout = ({ main }) => {
   return (
     <>
       <section className="container">
-        <aside className="fixed self-start hidden top-2 right-2 md:block z-50">
+        <aside className="fixed z-50 self-start hidden top-12 right-2 md:block">
           <SideBar />
         </aside>
         <main className="w-full py-3 pb-14">

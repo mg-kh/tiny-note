@@ -40,15 +40,15 @@ const SideBar = memo(function SideBar() {
 
   return (
     <>
-      <div className="flex flex-wrap justify-center w-12 gap-3 py-3 rounded-md bg-primary/10">
+      <div className="flex flex-wrap justify-center w-12 gap-3 py-3 rounded-md">
         {/* ----- back ----- */}
         <div
-          className="tooltip tooltip-left hover:tooltip-open"
+          className="tooltip tooltip-primary tooltip-left hover:tooltip-open"
           data-tip="Back"
         >
           <button
             onClick={handleBack}
-            className="btn btn-sm btn-outline btn-square"
+            className="btn btn-sm btn-square border-primary btn-primary"
           >
             <i className="w-4">
               <FiChevronLeft className="w-full h-full" />
@@ -60,10 +60,10 @@ const SideBar = memo(function SideBar() {
         <If isTrue={pathname !== HOME}>
           <Link href={HOME}>
             <div
-              className="tooltip tooltip-left hover:tooltip-open"
+              className="tooltip tooltip-primary tooltip-left hover:tooltip-open"
               data-tip="Home"
             >
-              <button className="btn btn-sm btn-outline btn-square">
+              <button className="btn btn-sm btn-square border-primary btn-primary">
                 <i className="w-4">
                   <FiHome className="w-full h-full" />
                 </i>
@@ -76,10 +76,10 @@ const SideBar = memo(function SideBar() {
         <If isTrue={pathname !== MY_NOTES}>
           <Link href={MY_NOTES}>
             <div
-              className="tooltip tooltip-left hover:tooltip-open"
+              className="tooltip tooltip-primary tooltip-left hover:tooltip-open"
               data-tip="All Notes"
             >
-              <button className="btn btn-sm btn-outline btn-square">
+              <button className="btn btn-sm btn-square border-primary btn-primary">
                 <i className="w-4">
                   <FiMenu className="w-full h-full" />
                 </i>
@@ -92,10 +92,10 @@ const SideBar = memo(function SideBar() {
         <If isTrue={pathname !== EDITOR}>
           <Link href={EDITOR}>
             <div
-              className="tooltip tooltip-left hover:tooltip-open"
+              className="tooltip tooltip-primary tooltip-left hover:tooltip-open"
               data-tip="Add New Note"
             >
-              <button className="btn btn-sm btn-outline btn-square">
+              <button className="btn btn-sm btn-square border-primary btn-primary">
                 <i className="w-4">
                   <FiPlus className="w-full h-full" />
                 </i>
@@ -107,12 +107,12 @@ const SideBar = memo(function SideBar() {
         {/* ----- edit ----- */}
         <If isTrue={pathname !== EDITOR && pathname !== MY_NOTES}>
           <div
-            className="tooltip tooltip-left hover:tooltip-open"
+            className="tooltip tooltip-primary tooltip-left hover:tooltip-open"
             data-tip="Edit Note"
           >
             <button
               onClick={handleGoToEdit}
-              className="btn btn-sm btn-outline btn-square"
+              className="btn btn-sm btn-square border-primary btn-primary"
             >
               <i className="w-4">
                 <FiEdit3 className="w-full h-full" />
@@ -126,11 +126,11 @@ const SideBar = memo(function SideBar() {
           isTrue={theme === "winter"}
           ifBlock={
             <div
-              className="tooltip tooltip-left hover:tooltip-open"
+              className="tooltip tooltip-primary tooltip-left hover:tooltip-open"
               data-tip="Night Mode"
             >
               <button
-                className="btn btn-outline btn-sm btn-square"
+                className="btn btn-sm btn-square border-primary btn-primary"
                 data-set-theme="dark"
                 onClick={() => setTheme("dark")}
               >
@@ -142,11 +142,11 @@ const SideBar = memo(function SideBar() {
           }
           elseBlock={
             <div
-              className="tooltip tooltip-left hover:tooltip-open"
+              className="tooltip tooltip-primary tooltip-left hover:tooltip-open"
               data-tip="Light Mode"
             >
               <button
-                className="btn btn-outline btn-sm btn-square"
+                className="btn btn-sm btn-square border-primary btn-primary"
                 data-set-theme="winter"
                 onClick={() => setTheme("winter")}
               >
