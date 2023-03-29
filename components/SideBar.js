@@ -27,7 +27,10 @@ const SideBar = memo(function SideBar() {
   useEffect(() => {
     themeChange(false);
     const theme = localStorage.getItem("theme");
-    setTheme(() => (theme ? theme : "winter"));
+    if (!theme) {
+      setTheme("winter");
+      localStorage.setItem("theme", "winter");
+    }
   }, []);
 
   const handleGoToEdit = () => {
@@ -105,7 +108,11 @@ const SideBar = memo(function SideBar() {
         </If>
 
         {/* ----- edit ----- */}
-        <If isTrue={pathname !== EDITOR && pathname !== MY_NOTES}>
+        <If
+          isTrue={
+            pathname !== EDITOR && pathname !== MY_NOTES && pathname !== HOME
+          }
+        >
           <div
             className="tooltip tooltip-primary tooltip-left hover:tooltip-open"
             data-tip="Edit Note"
@@ -127,7 +134,7 @@ const SideBar = memo(function SideBar() {
           ifBlock={
             <div
               className="tooltip tooltip-primary tooltip-left hover:tooltip-open"
-              data-tip="Night Mode"
+              data-tip="Dark Mode"
             >
               <button
                 className="btn btn-sm btn-square border-primary btn-primary"
