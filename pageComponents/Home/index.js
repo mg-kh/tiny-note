@@ -16,7 +16,7 @@ const Home = () => {
       main={
         <>
           <div>
-            <h1 className="mb-3 text-3xl">Introduction</h1>
+            <h1 className="mb-3 text-2xl md:text-3xl">Introduction</h1>
             <p>
               Tiny note is a simple and effective note taking website.All the
               notes are stored in the browser's <b>Indexdb</b>.This project is
@@ -31,8 +31,14 @@ const Home = () => {
           <div className="divider"></div>
 
           <div>
-            <h1 className="mb-3 text-3xl">Icon Explanation</h1>
+            <h1 className="mb-3 text-2xl md:text-3xl">Icon Explanation</h1>
             <div className="grid gap-3">
+              <div className="flex items-center gap-2">
+                <kbd className="kbd kbd-md">
+                  <FiHome />
+                </kbd>
+                <p>Go to home</p>
+              </div>
               <div className="flex items-center gap-2">
                 <kbd className="kbd kbd-md">
                   <FiChevronLeft />

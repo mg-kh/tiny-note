@@ -6,38 +6,55 @@ import { useRouter } from "next/router";
 import IfElse from "@/components/IfElse";
 import If from "@/components/If";
 
-import { FiMoon, FiSun, FiMenu, FiEdit3, FiPlus, FiHome } from "react-icons/fi";
+import {
+  FiChevronLeft,
+  FiEdit3,
+  FiHome,
+  FiMenu,
+  FiMoon,
+  FiPlus,
+  FiSun,
+} from "react-icons/fi";
 
 import { EDITOR, HOME, MY_NOTES } from "@/utils/locationPathName";
 
+import Hook from "./Hook";
+
 const Footer = memo(function Footer() {
-  const [theme, setTheme] = useState("");
-  const router = useRouter();
-  const { pathname } = router;
   const {
-    query: { id },
-  } = router;
-
-  useEffect(() => {
-    themeChange(false);
-    const theme = localStorage.getItem("theme");
-    setTheme(() => (theme ? theme : "winter"));
-  }, []);
-
-  const handleGoToEdit = () => {
-    router.push(`${EDITOR}/${id}`);
-  };
+    theme,
+    pathname,
+    // actions
+    handleGoToEdit,
+    handleBack,
+    setTheme,
+  } = Hook();
 
   return (
     <div className="flex justify-center gap-3 py-2">
+      {/* ----- back ----- */}
+      <div
+        className="tooltip tooltip-primary tooltip-top hover:tooltip-open"
+        data-tip="Back"
+      >
+        <button
+          onClick={handleBack}
+          className="btn btn-sm btn-square border-primary btn-primary"
+        >
+          <i className="w-4">
+            <FiChevronLeft className="w-full h-full" />
+          </i>
+        </button>
+      </div>
+
       {/* ----- Home ----- */}
       <If isTrue={pathname !== HOME}>
         <Link href={HOME}>
           <div
-            className="tooltip tooltip-top hover:tooltip-open"
+            className="tooltip tooltip-top tooltip-primary hover:tooltip-open"
             data-tip="Home"
           >
-            <button className="btn btn-sm btn-outline btn-square">
+            <button className="btn btn-sm btn-primary btn-square">
               <i className="w-4">
                 <FiHome className="w-full h-full" />
               </i>
@@ -50,10 +67,10 @@ const Footer = memo(function Footer() {
       <If isTrue={pathname !== MY_NOTES}>
         <Link href={MY_NOTES}>
           <div
-            className="tooltip tooltip-top hover:tooltip-open"
+            className="tooltip tooltip-top tooltip-primary hover:tooltip-open"
             data-tip="All Notes"
           >
-            <button className="btn btn-sm btn-outline btn-square">
+            <button className="btn btn-sm btn-primary btn-square">
               <i className="w-4">
                 <FiMenu className="w-full h-full" />
               </i>
@@ -66,10 +83,10 @@ const Footer = memo(function Footer() {
       <If isTrue={pathname !== EDITOR}>
         <Link href={EDITOR}>
           <div
-            className="tooltip tooltip-top hover:tooltip-open"
-            data-tip="Add New Note"
+            className="tooltip tooltip-top tooltip-primary hover:tooltip-open"
+            data-tip="Create New Note"
           >
-            <button className="btn btn-sm btn-outline btn-square">
+            <button className="btn btn-sm btn-primary btn-square">
               <i className="w-4">
                 <FiPlus className="w-full h-full" />
               </i>
@@ -81,12 +98,12 @@ const Footer = memo(function Footer() {
       {/* ----- edit ----- */}
       <If isTrue={pathname !== EDITOR && pathname !== MY_NOTES}>
         <div
-          className="tooltip tooltip-top hover:tooltip-open"
+          className="tooltip tooltip-top tooltip-primary hover:tooltip-open"
           data-tip="Edit Note"
         >
           <button
             onClick={handleGoToEdit}
-            className="btn btn-sm btn-outline btn-square"
+            className="btn btn-sm btn-primary btn-square"
           >
             <i className="w-4">
               <FiEdit3 className="w-full h-full" />
@@ -100,11 +117,11 @@ const Footer = memo(function Footer() {
         isTrue={theme === "winter"}
         ifBlock={
           <div
-            className="tooltip tooltip-top hover:tooltip-open"
+            className="tooltip tooltip-top tooltip-primary hover:tooltip-open"
             data-tip="Night Mode"
           >
             <button
-              className="btn btn-outline btn-sm btn-square"
+              className="btn btn-primary btn-sm btn-square"
               data-set-theme="dark"
               onClick={() => setTheme("dark")}
             >
@@ -116,11 +133,11 @@ const Footer = memo(function Footer() {
         }
         elseBlock={
           <div
-            className="tooltip tooltip-top hover:tooltip-open"
+            className="tooltip tooltip-top tooltip-primary hover:tooltip-open"
             data-tip="Light Mode"
           >
             <button
-              className="btn btn-outline btn-sm btn-square"
+              className="btn btn-primary btn-sm btn-square"
               data-set-theme="winter"
               onClick={() => setTheme("winter")}
             >

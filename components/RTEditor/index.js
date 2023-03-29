@@ -29,7 +29,7 @@ const RTEditor = ({
     <div>
       <div className="">
         {!readOnly && (
-          <div className="gap-2 py-2 mb-2 badge badge-primary">
+          <div className="gap-2 py-2 mb-2 badge badge-primary fixed top-1 z-20">
             <i className={cn({ "animate-spin": isAutoSaving })}>
               <FiRefreshCw />
             </i>
@@ -42,7 +42,10 @@ const RTEditor = ({
           type="text"
           defaultValue={title}
           placeholder="Title Here ..."
-          className="w-full p-0 text-xl font-bold bg-transparent focus:outline-none"
+          className={cn(
+            "w-full p-0 text-xl font-bold bg-transparent focus:outline-none",
+            { "mt-5": !readOnly }
+          )}
           onChange={(e) => setTitle(e.target.value)}
           onClick={() => setIsAutoSaving(true)}
           onBlur={() => setIsAutoSaving(false)}

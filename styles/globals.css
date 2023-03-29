@@ -24,7 +24,7 @@
 }
 .ql-toolbar {
     position: sticky;
-    top : 0px;
+    top : 20px;
     z-index: 10;
     padding : 5px!important;
     display: inline-block;

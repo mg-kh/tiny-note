@@ -1,45 +1,30 @@
-import { memo, useEffect, useState } from "react";
-import { themeChange } from "theme-change";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { memo } from "react";
 
-import IfElse from "@/components/IfElse";
 import If from "@/components/If";
+import IfElse from "@/components/IfElse";
 import { EDITOR, HOME, MY_NOTES } from "@/utils/locationPathName";
 import {
-  FiMoon,
-  FiSun,
-  FiMenu,
-  FiEdit3,
-  FiPlus,
-  FiHome,
   FiChevronLeft,
+  FiEdit3,
+  FiHome,
+  FiMenu,
+  FiMoon,
+  FiPlus,
+  FiSun,
 } from "react-icons/fi";
 
+import Hook from "./Hook";
+
 const SideBar = memo(function SideBar() {
-  const [theme, setTheme] = useState("");
-  const router = useRouter();
-  const { pathname } = router;
   const {
-    query: { id },
-  } = router;
-
-  useEffect(() => {
-    themeChange(false);
-    const theme = localStorage.getItem("theme");
-    if (!theme) {
-      setTheme("winter");
-      localStorage.setItem("theme", "winter");
-    }
-  }, []);
-
-  const handleGoToEdit = () => {
-    router.push(`${EDITOR}/${id}`);
-  };
-
-  const handleBack = () => {
-    router.back();
-  };
+    theme,
+    pathname,
+    // actions
+    handleGoToEdit,
+    handleBack,
+    setTheme,
+  } = Hook();
 
   return (
     <>
@@ -96,7 +81,7 @@ const SideBar = memo(function SideBar() {
           <Link href={EDITOR}>
             <div
               className="tooltip tooltip-primary tooltip-left hover:tooltip-open"
-              data-tip="Add New Note"
+              data-tip="Create New Note"
             >
               <button className="btn btn-sm btn-square border-primary btn-primary">
                 <i className="w-4">
