@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    html {
+      font-family: RobotoMono;
+    }
+  }
+
+  @font-face {
+    font-family: RobotoMono;
+    src: url('/fonts/RobotoMono.ttf');
+  }
+
 .btn{
     @apply capitalize
 }
@@ -33,7 +44,8 @@
 .ql-editor{
     padding : 0px!important;
     min-height: 100px;
-    line-height: 32px!important;
+    line-height: 25px!important;
+    font-family: RobotoMono;
 }
 .ql-active{
     border :  1px solid #7c7c7c !important;
