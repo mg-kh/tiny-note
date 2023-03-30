@@ -4,19 +4,21 @@ import { FiAlertOctagon, FiCheck } from "react-icons/fi";
 import useEventBus from "event-bus-react";
 
 import IfElse from "./IfElse";
+import { SHOW_ALERT, SHOW_ALERT_EVENT } from "@/utils/constants";
 
 const Alert = () => {
-  const { subscribe } = useEventBus();
+  const { subscribe } = useEventBus(SHOW_ALERT_EVENT);
   const [isShowAlert, setIsShowAlert] = useState(false);
   const [alertType, setAlertType] = useState("success");
   const [message, setAlertMessage] = useState("");
 
-  subscribe("alert", ({ type, message }) => {
+  subscribe(SHOW_ALERT, ({ type, message }) => {
     setIsShowAlert(true);
     setAlertType(type);
     setAlertMessage(message);
     const timeout = setTimeout(() => {
       setIsShowAlert(false);
+      clearTimeout(timeout);
     }, 1500);
   });
 

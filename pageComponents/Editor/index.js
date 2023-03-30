@@ -13,7 +13,6 @@ const Editor = () => {
     title,
     color,
     body,
-    isAutoSaving,
     // actions
     setBody,
     setColor,
@@ -43,8 +42,6 @@ const Editor = () => {
               setColor={setColor}
               body={body}
               setBody={setBody}
-              isAutoSaving={isAutoSaving}
-              setIsAutoSaving={setIsAutoSaving}
             />
           </>
         }

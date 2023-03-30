@@ -21,7 +21,7 @@ const Home = () => {
               Tiny note is a simple and effective note taking website.All the
               notes are stored in the browser's <b>Indexdb</b>.This project is
               open-source and all the source code can be found{" "}
-              <Link ink href="https://github.com/mg-kh/tiny-note">
+              <Link href="https://github.com/mg-kh/tiny-note">
                 <span className="text-blue-500 underline">here</span>
               </Link>
               .

@@ -16,6 +16,8 @@ const Hook = () => {
     if (!theme) {
       setTheme("winter");
       localStorage.setItem("theme", "winter");
+    } else {
+      setTheme(theme);
     }
   }, []);
 

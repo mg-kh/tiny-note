@@ -1,71 +1,56 @@
+import { insertNote } from "@/services/tinyNote.service";
 import {
-  insertNote,
-  replaceNote,
-  getSingleNote,
-  removeSingleNote,
-} from "@/services/tinyNote.service";
+  SAVE_NOTE,
+  SAVE_NOTE_EVENT,
+  SHOW_ALERT,
+  SHOW_ALERT_EVENT,
+} from "@/utils/constants";
 import { INSERT_SUCCESS_MESSAGE } from "@/utils/infoMessages";
-import { debounce, isEmpty } from "lodash";
-import { useRef, useState, useEffect, useCallback } from "react";
+import useEventBus from "event-bus-react";
+import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 const Hook = () => {
   const [body, setBody] = useState("");
   const [color, setColor] = useState("#22c55e");
   const [title, setTitle] = useState("");
-  const [id, setId] = useState("");
-  const [isAutoSaving, setIsAutoSaving] = useState(false);
+  const { subscribe } = useEventBus(SAVE_NOTE_EVENT);
 
-  const handleInsertNote = useCallback(() => {
+  const handleInsertNote = () => {
+    const id = uuidv4();
     const note = {
-      id,
       title,
       body,
       color,
     };
-    insertNote(note)
+    insertNote(id, note)
       .then(() => {
-        //
+        setTitle("");
+        setBody("");
+        setColor("#22c55e");
+        window[SHOW_ALERT_EVENT].emit(SHOW_ALERT, {
+          type: "success",
+          message: INSERT_SUCCESS_MESSAGE,
+        });
       })
       .catch((error) => {
         //
       });
-  }, [id]);
+  };
 
-  const handleReplaceNote = useCallback(() => {
-    const note = {
-      id,
-      title,
-      body,
-      color,
-    };
-    replaceNote(id, note).then(() => {
-      //
-    });
-  }, [title, body, color]);
-
-  // create skeleton note in storage
-  useEffect(() => {
+  // subscribe the save event
+  subscribe(SAVE_NOTE, () => {
     handleInsertNote();
-  }, [id]);
-
-  useEffect(() => {
-    setId(uuidv4());
-    return () => setId("");
-  }, []);
-
-  useEffect(handleReplaceNote, [title, body, color]);
+  });
 
   return {
     color,
     body,
     title,
-    isAutoSaving,
     // actions
     setBody,
     setColor,
     setTitle,
-    setIsAutoSaving,
   };
 };
 

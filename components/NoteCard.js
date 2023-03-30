@@ -11,8 +11,8 @@ const NoteCard = ({ note, onClick }) => {
         <button onClick={onClick} className="btn btn-ghost btn-sm">
           <FiTrash2 />
         </button>
-        <Link href={`${MY_NOTES}/${note.id}`}>
-          <u style={{ color: note?.color }}>{note.title}</u>
+        <Link href={`${MY_NOTES}/${note?.id}`}>
+          <u style={{ color: note?.color }}>{note?.title}</u>
         </Link>
       </div>
     </>

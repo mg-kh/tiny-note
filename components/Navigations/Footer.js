@@ -14,11 +14,13 @@ import {
   FiMoon,
   FiPlus,
   FiSun,
+  FiSave,
 } from "react-icons/fi";
 
 import { EDITOR, HOME, MY_NOTES } from "@/utils/locationPathName";
 
 import Hook from "./Hook";
+import { SAVE_NOTE } from "@/utils/constants";
 
 const Footer = memo(function Footer() {
   const {
@@ -77,6 +79,25 @@ const Footer = memo(function Footer() {
             </button>
           </div>
         </Link>
+      </If>
+
+      {/* ----- save ----- */}
+      <If isTrue={pathname === EDITOR}>
+        <div
+          className="tooltip tooltip-primary tooltip-top hover:tooltip-open"
+          data-tip="Save Notes"
+        >
+          <button
+            onClick={() => {
+              EventBus.emit(SAVE_NOTE);
+            }}
+            className="btn btn-sm btn-square border-primary btn-primary"
+          >
+            <i className="w-4">
+              <FiSave className="w-full h-full" />
+            </i>
+          </button>
+        </div>
       </If>
 
       {/* ----- add new note ----- */}

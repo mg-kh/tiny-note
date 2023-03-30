@@ -12,9 +12,11 @@ import {
   FiMoon,
   FiPlus,
   FiSun,
+  FiSave,
 } from "react-icons/fi";
 
 import Hook from "./Hook";
+import { SAVE_NOTE, SAVE_NOTE_EVENT } from "@/utils/constants";
 
 const SideBar = memo(function SideBar() {
   const {
@@ -74,6 +76,25 @@ const SideBar = memo(function SideBar() {
               </button>
             </div>
           </Link>
+        </If>
+
+        {/* ----- save ----- */}
+        <If isTrue={pathname === EDITOR}>
+          <div
+            className="tooltip tooltip-primary tooltip-left hover:tooltip-open"
+            data-tip="Save Notes"
+          >
+            <button
+              onClick={() => {
+                window[SAVE_NOTE_EVENT].emit(SAVE_NOTE);
+              }}
+              className="btn btn-sm btn-square border-primary btn-primary"
+            >
+              <i className="w-4">
+                <FiSave className="w-full h-full" />
+              </i>
+            </button>
+          </div>
         </If>
 
         {/* ----- add new note ----- */}

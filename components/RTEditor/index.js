@@ -22,29 +22,18 @@ const RTEditor = ({
   readOnly = false,
   color,
   setColor,
-  isAutoSaving,
   setIsAutoSaving = () => {},
 }) => {
   return (
     <div>
       <div className="">
-        {!readOnly && (
-          <div className="gap-2 py-2 mb-2 badge badge-primary fixed top-1 z-20">
-            <i className={cn({ "animate-spin": isAutoSaving })}>
-              <FiRefreshCw />
-            </i>
-            <p className="text-xs">auto saving</p>
-          </div>
-        )}
-
         <input
           disabled={readOnly}
           type="text"
-          defaultValue={title}
+          value={title}
           placeholder="Title Here ..."
           className={cn(
-            "w-full p-0 text-xl font-bold bg-transparent focus:outline-none",
-            { "mt-5": !readOnly }
+            "w-full p-0 text-xl font-bold bg-transparent focus:outline-none"
           )}
           onChange={(e) => setTitle(e.target.value)}
           onClick={() => setIsAutoSaving(true)}
