@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { FiAlertOctagon, FiCheck } from "react-icons/fi";
 
-import useEventBus from "event-bus-react";
+import { subscribe } from "event-bus-react";
 
+import { SHOW_ALERT } from "@/utils/constants";
 import IfElse from "./IfElse";
-import { SHOW_ALERT, SHOW_ALERT_EVENT } from "@/utils/constants";
 
 const Alert = () => {
-  const { subscribe } = useEventBus(SHOW_ALERT_EVENT);
   const [isShowAlert, setIsShowAlert] = useState(false);
   const [alertType, setAlertType] = useState("success");
   const [message, setAlertMessage] = useState("");

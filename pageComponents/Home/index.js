@@ -1,5 +1,6 @@
 import MainLayout from "@/layouts/MainLayout";
 import Link from "next/link";
+import { useEffect, useLayoutEffect } from "react";
 import {
   FiMoon,
   FiSun,

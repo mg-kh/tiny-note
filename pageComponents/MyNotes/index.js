@@ -1,8 +1,8 @@
-import cn from "classnames";
 import isEmpty from "lodash/isEmpty";
 import Link from "next/link";
 import React from "react";
 import { GithubPicker } from "react-color";
+import cn from "classnames";
 
 import IfElse from "@/components/IfElse";
 import NoteCard from "@/components/NoteCard";
@@ -19,8 +19,10 @@ const MyNotes = () => {
     keyword,
     color,
     isSearching,
+    isShowConfirmBox,
     //action
     handleRemoveSingleNote,
+    handleConfirmRemoveSingleNote,
     handleCancelColorSearch,
     handleCancelTitleSearch,
     setKeyword,
@@ -249,6 +251,29 @@ const MyNotes = () => {
           </>
         }
       />
+
+      {/* ----- delete confirm modal ----- */}
+      <div className={cn("modal", { "modal-open": isShowConfirmBox })}>
+        <div className="modal-box">
+          <h3 className="text-lg font-bold">
+            Are you sure to delete this note?
+          </h3>
+          <p className="py-4">
+            Deleting process doesn't have <b>'undo'</b> process.
+          </p>
+          <div className="modal-action">
+            <button className="btn" onClick={handleRemoveSingleNote}>
+              Cancel
+            </button>
+            <button
+              onClick={handleConfirmRemoveSingleNote}
+              className="btn btn-primary btn-outline"
+            >
+              Confirm
+            </button>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

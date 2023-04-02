@@ -20,6 +20,8 @@ const Hook = () => {
       return false;
     }
   }, [color, keyword]);
+  const [isShowConfirmBox, setIsShowConfirmBox] = useState(false);
+  const [currentNoteId, setCurrentNoteId] = useState(0);
 
   const handleGetAllNotes = useCallback(() => {
     let tempNotes = [];
@@ -34,10 +36,16 @@ const Hook = () => {
       .catch();
   }, []);
 
-  const handleRemoveSingleNote = (id) => {
-    removeSingleNote(id)
+  const handleRemoveSingleNote = (id = 0) => {
+    setCurrentNoteId(id);
+    setIsShowConfirmBox((prev) => !prev);
+  };
+
+  const handleConfirmRemoveSingleNote = () => {
+    removeSingleNote(currentNoteId)
       .then(() => {
-        window[SHOW_ALERT_EVENT].emit(SHOW_ALERT, {
+        setIsShowConfirmBox(false);
+        EventBus.emit(SHOW_ALERT, {
           type: "success",
           message: DELETE_SUCCESS_MESSAGE,
         });
@@ -76,8 +84,10 @@ const Hook = () => {
     keyword,
     color,
     isSearching,
+    isShowConfirmBox,
     // actions
     handleRemoveSingleNote,
+    handleConfirmRemoveSingleNote,
     handleCancelColorSearch,
     handleCancelTitleSearch,
     setKeyword,

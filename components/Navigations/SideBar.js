@@ -86,7 +86,7 @@ const SideBar = memo(function SideBar() {
           >
             <button
               onClick={() => {
-                window[SAVE_NOTE_EVENT].emit(SAVE_NOTE);
+                EventBus.emit(SAVE_NOTE);
               }}
               className="btn btn-sm btn-square border-primary btn-primary"
             >
