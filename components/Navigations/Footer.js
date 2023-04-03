@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 
 import IfElse from "@/components/IfElse";
 import If from "@/components/If";
+import includes from "lodash/includes";
 
 import {
   FiChevronLeft,
@@ -26,6 +27,7 @@ const Footer = memo(function Footer() {
   const {
     theme,
     pathname,
+    id,
     // actions
     handleGoToEdit,
     handleBack,
@@ -40,6 +42,7 @@ const Footer = memo(function Footer() {
         data-tip="Back"
       >
         <button
+          aria-label="Back"
           onClick={handleBack}
           className="btn btn-sm btn-square border-primary btn-primary"
         >
@@ -56,7 +59,10 @@ const Footer = memo(function Footer() {
             className="tooltip tooltip-top tooltip-primary hover:tooltip-open"
             data-tip="Home"
           >
-            <button className="btn btn-sm btn-primary btn-square">
+            <button
+              aria-label="Home"
+              className="btn btn-sm btn-primary btn-square"
+            >
               <i className="w-4">
                 <FiHome className="w-full h-full" />
               </i>
@@ -72,7 +78,10 @@ const Footer = memo(function Footer() {
             className="tooltip tooltip-top tooltip-primary hover:tooltip-open"
             data-tip="All Notes"
           >
-            <button className="btn btn-sm btn-primary btn-square">
+            <button
+              aria-label="All Notes"
+              className="btn btn-sm btn-primary btn-square"
+            >
               <i className="w-4">
                 <FiMenu className="w-full h-full" />
               </i>
@@ -88,8 +97,13 @@ const Footer = memo(function Footer() {
           data-tip="Save Notes"
         >
           <button
+            aria-label="Save Note"
             onClick={() => {
-              EventBus.emit(SAVE_NOTE);
+              if (id) {
+                EventBus.emit(UPDATE_NOTE);
+              } else {
+                EventBus.emit(SAVE_NOTE);
+              }
             }}
             className="btn btn-sm btn-square border-primary btn-primary"
           >
@@ -107,7 +121,10 @@ const Footer = memo(function Footer() {
             className="tooltip tooltip-top tooltip-primary hover:tooltip-open"
             data-tip="Create New Note"
           >
-            <button className="btn btn-sm btn-primary btn-square">
+            <button
+              aria-label="Add New Note"
+              className="btn btn-sm btn-primary btn-square"
+            >
               <i className="w-4">
                 <FiPlus className="w-full h-full" />
               </i>
@@ -117,12 +134,19 @@ const Footer = memo(function Footer() {
       </If>
 
       {/* ----- edit ----- */}
-      <If isTrue={pathname !== EDITOR && pathname !== MY_NOTES}>
+      <If
+        isTrue={
+          !includes(pathname, "editor") &&
+          pathname !== MY_NOTES &&
+          pathname !== HOME
+        }
+      >
         <div
           className="tooltip tooltip-top tooltip-primary hover:tooltip-open"
           data-tip="Edit Note"
         >
           <button
+            aria-label="Edit Note"
             onClick={handleGoToEdit}
             className="btn btn-sm btn-primary btn-square"
           >
@@ -142,6 +166,7 @@ const Footer = memo(function Footer() {
             data-tip="Night Mode"
           >
             <button
+              aria-label="Dark Mode"
               className="btn btn-primary btn-sm btn-square"
               data-set-theme="dark"
               onClick={() => setTheme("dark")}
@@ -158,6 +183,7 @@ const Footer = memo(function Footer() {
             data-tip="Light Mode"
           >
             <button
+              aria-label="Light Mode"
               className="btn btn-primary btn-sm btn-square"
               data-set-theme="winter"
               onClick={() => setTheme("winter")}

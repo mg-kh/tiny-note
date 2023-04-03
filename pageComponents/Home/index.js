@@ -23,7 +23,7 @@ const Home = () => {
               notes are stored in the browser's <b>Indexdb</b>.This project is
               open-source and all the source code can be found{" "}
               <Link href="https://github.com/mg-kh/tiny-note">
-                <span className="text-blue-500 underline">here</span>
+                <span className="text-blue-500 underline">Github</span>
               </Link>
               .
             </p>

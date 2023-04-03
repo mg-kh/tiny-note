@@ -39,6 +39,7 @@ const SideBar = memo(function SideBar() {
           data-tip="Back"
         >
           <button
+            aria-label="Back"
             onClick={handleBack}
             className="btn btn-sm btn-square border-primary btn-primary"
           >
@@ -55,11 +56,14 @@ const SideBar = memo(function SideBar() {
               className="tooltip tooltip-primary tooltip-left hover:tooltip-open"
               data-tip="Home"
             >
-              <button className="btn btn-sm btn-square border-primary btn-primary">
+              <butto
+                aria-label="Home"
+                className="btn btn-sm btn-square border-primary btn-primary"
+              >
                 <i className="w-4">
                   <FiHome className="w-full h-full" />
                 </i>
-              </button>
+              </butto>
             </div>
           </Link>
         </If>
@@ -71,7 +75,10 @@ const SideBar = memo(function SideBar() {
               className="tooltip tooltip-primary tooltip-left hover:tooltip-open"
               data-tip="All Notes"
             >
-              <button className="btn btn-sm btn-square border-primary btn-primary">
+              <button
+                aria-label="All Notes"
+                className="btn btn-sm btn-square border-primary btn-primary"
+              >
                 <i className="w-4">
                   <FiMenu className="w-full h-full" />
                 </i>
@@ -87,9 +94,7 @@ const SideBar = memo(function SideBar() {
             data-tip="Save Notes"
           >
             <button
-              // onClick={() => {
-              //   EventBus.emit(SAVE_NOTE);
-              // }}
+              aria-label="Save Note"
               onClick={() => {
                 if (id) {
                   EventBus.emit(UPDATE_NOTE);
@@ -113,7 +118,10 @@ const SideBar = memo(function SideBar() {
               className="tooltip tooltip-primary tooltip-left hover:tooltip-open"
               data-tip="Create New Note"
             >
-              <button className="btn btn-sm btn-square border-primary btn-primary">
+              <button
+                aria-label="Add New Note"
+                className="btn btn-sm btn-square border-primary btn-primary"
+              >
                 <i className="w-4">
                   <FiPlus className="w-full h-full" />
                 </i>
@@ -135,6 +143,7 @@ const SideBar = memo(function SideBar() {
             data-tip="Edit Note"
           >
             <button
+              aria-label="Edit Note"
               onClick={handleGoToEdit}
               className="btn btn-sm btn-square border-primary btn-primary"
             >
@@ -154,6 +163,7 @@ const SideBar = memo(function SideBar() {
               data-tip="Dark Mode"
             >
               <button
+                aria-label="Dark Mode"
                 className="btn btn-sm btn-square border-primary btn-primary"
                 data-set-theme="dark"
                 onClick={() => setTheme("dark")}
@@ -170,6 +180,7 @@ const SideBar = memo(function SideBar() {
               data-tip="Light Mode"
             >
               <button
+                aria-label="Light Mode"
                 className="btn btn-sm btn-square border-primary btn-primary"
                 data-set-theme="winter"
                 onClick={() => setTheme("winter")}
