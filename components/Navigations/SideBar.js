@@ -14,14 +14,16 @@ import {
   FiSun,
   FiSave,
 } from "react-icons/fi";
+import includes from "lodash/includes";
 
 import Hook from "./Hook";
-import { SAVE_NOTE, SAVE_NOTE_EVENT } from "@/utils/constants";
+import { SAVE_NOTE, SAVE_NOTE_EVENT, UPDATE_NOTE } from "@/utils/constants";
 
 const SideBar = memo(function SideBar() {
   const {
     theme,
     pathname,
+    id,
     // actions
     handleGoToEdit,
     handleBack,
@@ -79,14 +81,21 @@ const SideBar = memo(function SideBar() {
         </If>
 
         {/* ----- save ----- */}
-        <If isTrue={pathname === EDITOR}>
+        <If isTrue={includes(pathname, "editor")}>
           <div
             className="tooltip tooltip-primary tooltip-left hover:tooltip-open"
             data-tip="Save Notes"
           >
             <button
+              // onClick={() => {
+              //   EventBus.emit(SAVE_NOTE);
+              // }}
               onClick={() => {
-                EventBus.emit(SAVE_NOTE);
+                if (id) {
+                  EventBus.emit(UPDATE_NOTE);
+                } else {
+                  EventBus.emit(SAVE_NOTE);
+                }
               }}
               className="btn btn-sm btn-square border-primary btn-primary"
             >
@@ -116,7 +125,9 @@ const SideBar = memo(function SideBar() {
         {/* ----- edit ----- */}
         <If
           isTrue={
-            pathname !== EDITOR && pathname !== MY_NOTES && pathname !== HOME
+            !includes(pathname, "editor") &&
+            pathname !== MY_NOTES &&
+            pathname !== HOME
           }
         >
           <div

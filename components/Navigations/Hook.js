@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { themeChange } from "theme-change";
+import { EDITOR } from "@/utils/locationPathName";
 
 const Hook = () => {
   const [theme, setTheme] = useState("");
@@ -32,6 +33,7 @@ const Hook = () => {
   return {
     theme,
     pathname,
+    id,
     // actions
     handleGoToEdit,
     handleBack,

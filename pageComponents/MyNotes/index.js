@@ -127,6 +127,7 @@ const MyNotes = () => {
                               <NoteCard
                                 onClick={() => handleRemoveSingleNote(note?.id)}
                                 note={note?.value}
+                                id={note?.id}
                               />
                             </React.Fragment>
                           ))}
@@ -239,6 +240,7 @@ const MyNotes = () => {
                             <NoteCard
                               onClick={() => handleRemoveSingleNote(note?.id)}
                               note={note?.value}
+                              id={note?.id}
                             />
                           </React.Fragment>
                         ))}

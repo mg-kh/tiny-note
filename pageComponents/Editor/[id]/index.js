@@ -8,26 +8,22 @@ const EditNote = () => {
     title,
     body,
     color,
-    isAutoSaving,
     // actions
     setBody,
     setColor,
     setTitle,
-    setIsAutoSaving,
   } = Hook();
   return (
     <MainLayout
       main={
         <>
           <RTEditor
-            color={color}
-            setColor={setColor}
-            body={body}
-            setBody={setBody}
             title={title}
             setTitle={setTitle}
-            isAutoSaving={isAutoSaving}
-            setIsAutoSaving={setIsAutoSaving}
+            body={body}
+            setBody={setBody}
+            color={color}
+            setColor={setColor}
           />
         </>
       }

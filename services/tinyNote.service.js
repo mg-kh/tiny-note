@@ -15,24 +15,11 @@ export const getAllNotes = async () => {
 };
 
 export const replaceNote = async (id, data) => {
-  try {
-    let allNotes = (await GetAllNotes()) || [];
-    let idx = findIndex(allNotes, (note) => note.id === id);
-    allNotes.splice(idx, 1, data);
-    return await InsertNotes(allNotes);
-  } catch (error) {
-    return GENERAL_ERROR_MESSAGE;
-  }
+  return await tinyNoteStorage.setItem(id, data);
 };
 
 export const getSingleNote = async (id) => {
-  try {
-    const allNotes = await GetAllNotes();
-    const filteredData = allNotes.find((note) => note.id === id);
-    return filteredData;
-  } catch (error) {
-    return GENERAL_ERROR_MESSAGE;
-  }
+  return await tinyNoteStorage.getItem(id);
 };
 
 export const removeSingleNote = async (id) => {
