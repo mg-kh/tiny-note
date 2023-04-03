@@ -1,7 +1,5 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# Pwa
-/public
 
 # dependencies
 /node_modules
@@ -37,3 +35,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Pwa
+**/public/workbox-*.js
+**/public/sw.js
+**/public/worker-*.js
+**/public/service-workder.js
+**/public/service-workder.js.map
